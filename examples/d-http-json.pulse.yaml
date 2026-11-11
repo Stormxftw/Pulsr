@@ -1,0 +1,10 @@
+# Illustrative endpoint from the plan; conformance is offline, not a live probe.
+pulse: 1
+title: Dota 2 · players now
+source:
+  kind: http_json
+  params:
+    url: https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=570
+    metrics: {players: /response/player_count}
+ring: {components: [{metric: players, weight: 100, type: delta, baseline: median, window: 24h, sensitivity: 0.3}]}
+capsule: {metric: players, label: "{value} playing", fill: baseline}

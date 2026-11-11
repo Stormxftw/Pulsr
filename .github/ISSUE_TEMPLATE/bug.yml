@@ -1,0 +1,46 @@
+name: Bug
+description: Something in Pulsr shows wrong data, formats badly, or breaks.
+labels: [bug]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Source / data (a specific pulse kind)
+        - Pane rendering / blocks
+        - Pulse Builder
+        - Approval / disclosure
+        - Groups / sessions
+        - Background collection
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: kind
+    attributes:
+      label: Pulse kind
+      description: e.g. discord.invite, github.repo, github.search, http_json, mcp.tool, hermes.activity, desktop.notifications, sessions
+  - type: textarea
+    id: symptom
+    attributes:
+      label: What happens
+      description: Exact text on screen, screenshot, or error. Never paste tokens.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps / definition to reproduce
+      description: Pulse YAML (no secrets), pane width, light/dark, Hermes version.
+  - type: input
+    id: version
+    attributes:
+      label: Plugin commit / version
+      placeholder: e.g. 7ae8c5a

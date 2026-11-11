@@ -1,0 +1,2771 @@
+{
+  "type": "object",
+  "properties": {
+    "pulse": {
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,47}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60,
+      "format": "pulse-display-text"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "discord.invite",
+            "discord.invite@1",
+            "github.search",
+            "github.search@1",
+            "github.repo",
+            "github.repo@1",
+            "hermes.activity",
+            "hermes.activity@1",
+            "mcp.tool",
+            "mcp.tool@1",
+            "http_json",
+            "http_json@1",
+            "web.feed",
+            "web.feed@1",
+            "desktop.notifications",
+            "desktop.notifications@1"
+          ]
+        },
+        "params": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "every": {
+      "type": "string",
+      "pattern": "^[0-9]{1,12}[smh]$",
+      "format": "pulse-duration"
+    },
+    "ring": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "properties": {
+              "metric": {
+                "type": "string",
+                "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+              },
+              "weight": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "type": {
+                "enum": [
+                  "delta",
+                  "level"
+                ]
+              },
+              "baseline": {
+                "anyOf": [
+                  {
+                    "enum": [
+                      "median",
+                      "oldest",
+                      "source"
+                    ]
+                  },
+                  {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                ]
+              },
+              "window": {
+                "type": "string",
+                "pattern": "^[0-9]{1,12}[smh]$",
+                "format": "pulse-duration"
+              },
+              "floor": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "sensitivity": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "direction": {
+                "enum": [
+                  "both",
+                  "up",
+                  "down"
+                ]
+              },
+              "full_at": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "metric",
+              "weight",
+              "type"
+            ],
+            "patternProperties": {
+              "^x-": {}
+            },
+            "additionalProperties": false,
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "level"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "full_at"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "baseline"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "window"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "floor"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "sensitivity"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "direction"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "delta"
+                    }
+                  }
+                },
+                "then": {
+                  "not": {
+                    "required": [
+                      "full_at"
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "components"
+      ],
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "capsule": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 40,
+          "format": "pulse-template"
+        },
+        "fill": {
+          "anyOf": [
+            {
+              "enum": [
+                "baseline",
+                "none"
+              ]
+            },
+            {
+              "type": "object",
+              "properties": {
+                "full_at": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                }
+              },
+              "required": [
+                "full_at"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "required": [
+        "metric",
+        "label",
+        "fill"
+      ],
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    },
+    "lines": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 40,
+            "format": "pulse-template"
+          },
+          "show": {
+            "enum": [
+              "value",
+              "delta"
+            ]
+          },
+          "hide_when_zero": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "metric",
+          "label"
+        ],
+        "patternProperties": {
+          "^x-": {}
+        },
+        "additionalProperties": false
+      }
+    },
+    "alert": {
+      "type": "object",
+      "properties": {
+        "ring_at_least": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "metric": {
+          "type": "string",
+          "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+        },
+        "above": {
+          "type": "number"
+        },
+        "below": {
+          "type": "number"
+        },
+        "notify": {
+          "enum": [
+            "none",
+            "toast",
+            "os",
+            "pet"
+          ]
+        }
+      },
+      "required": [],
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "required": [
+            "ring_at_least"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "metric"
+                ]
+              },
+              {
+                "required": [
+                  "above"
+                ]
+              },
+              {
+                "required": [
+                  "below"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "metric",
+            "above"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "below"
+                ]
+              },
+              {
+                "required": [
+                  "ring_at_least"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "required": [
+            "metric",
+            "below"
+          ],
+          "not": {
+            "anyOf": [
+              {
+                "required": [
+                  "above"
+                ]
+              },
+              {
+                "required": [
+                  "ring_at_least"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "icon": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "pulse-icon"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "brand": {
+              "type": "string",
+              "pattern": "^[a-z0-9][a-z0-9._-]{0,63}(?![\\s\\S])"
+            },
+            "url": {
+              "type": "string",
+              "maxLength": 300,
+              "format": "pulse-icon-url"
+            },
+            "emoji": {
+              "type": "string",
+              "format": "pulse-emoji"
+            }
+          },
+          "required": [],
+          "patternProperties": {
+            "^x-": {}
+          },
+          "additionalProperties": false,
+          "oneOf": [
+            {
+              "required": [
+                "brand"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "url"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "emoji"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "required": [
+                "url"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "brand"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "emoji"
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "required": [
+                "emoji"
+              ],
+              "not": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "brand"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "url"
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "link": {
+      "type": "string",
+      "maxLength": 300,
+      "format": "pulse-https-url"
+    },
+    "feeds": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 3,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]{0,15}(?![\\s\\S])"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "kind": {
+            "enum": [
+              "discord.invite",
+              "discord.invite@1",
+              "github.search",
+              "github.search@1",
+              "github.repo",
+              "github.repo@1",
+              "hermes.activity",
+              "hermes.activity@1",
+              "mcp.tool",
+              "mcp.tool@1",
+              "http_json",
+              "http_json@1",
+              "web.feed",
+              "web.feed@1",
+              "desktop.notifications",
+              "desktop.notifications@1"
+            ]
+          },
+          "params": {
+            "type": "object"
+          },
+          "every": {
+            "type": "string",
+            "pattern": "^[0-9]{1,12}[smh]$",
+            "format": "pulse-duration"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "patternProperties": {
+          "^x-": {}
+        },
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "discord.invite",
+                    "discord.invite@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "invite": {
+                      "type": "string",
+                      "maxLength": 256,
+                      "format": "pulse-invite"
+                    },
+                    "voice": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  },
+                  "required": [
+                    "invite"
+                  ],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-discord.invite"
+                }
+              },
+              "required": [
+                "params"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "github.search",
+                    "github.search@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "repo": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}/[A-Za-z0-9_.-]{1,100}$",
+                      "format": "pulse-repo"
+                    },
+                    "type": {
+                      "enum": [
+                        "pr",
+                        "issue"
+                      ]
+                    },
+                    "title_contains": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9 ._-]{1,40}$"
+                    },
+                    "label": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9 ._-]{1,40}$"
+                    },
+                    "window": {
+                      "enum": [
+                        "24h",
+                        "7d"
+                      ],
+                      "default": "24h"
+                    },
+                    "baseline_days": {
+                      "type": "integer",
+                      "minimum": 7,
+                      "maximum": 30,
+                      "default": 14
+                    }
+                  },
+                  "required": [
+                    "repo",
+                    "type"
+                  ],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-github.search"
+                }
+              },
+              "required": [
+                "params"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "github.repo",
+                    "github.repo@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "repo": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}/[A-Za-z0-9_.-]{1,100}$",
+                      "format": "pulse-repo"
+                    },
+                    "activity": {"type": "boolean", "default": false},
+                    "ci": {"type": "boolean", "default": false}
+                  },
+                  "required": [
+                    "repo"
+                  ],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-github.repo"
+                }
+              },
+              "required": [
+                "params"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "hermes.activity",
+                    "hermes.activity@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "scope": {
+                      "enum": [
+                        "profile"
+                      ],
+                      "default": "profile"
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-hermes.activity"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "mcp.tool",
+                    "mcp.tool@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "server": {
+                      "type": "string",
+                      "pattern": "^(?!.*__)[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+                    },
+                    "tool": {
+                      "type": "string",
+                      "pattern": "^(?!.*__)[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+                    },
+                    "args": {
+                      "type": "object",
+                      "default": {},
+                      "maxProperties": 32,
+                      "format": "pulse-mcp-args"
+                    },
+                    "metrics": {
+                      "type": "object",
+                      "minProperties": 1,
+                      "maxProperties": 6,
+                      "propertyNames": {
+                        "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+                      },
+                      "additionalProperties": {
+                        "type": "string",
+                        "maxLength": 512,
+                        "format": "pulse-json-pointer"
+                      }
+                    }
+                  },
+                  "required": [
+                    "server",
+                    "tool",
+                    "metrics"
+                  ],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-mcp.tool"
+                }
+              },
+              "required": [
+                "params"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "http_json",
+                    "http_json@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "maxLength": 512,
+                      "format": "pulse-public-url"
+                    },
+                    "metrics": {
+                      "type": "object",
+                      "minProperties": 1,
+                      "maxProperties": 6,
+                      "propertyNames": {
+                        "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+                      },
+                      "additionalProperties": {
+                        "type": "string",
+                        "maxLength": 512,
+                        "format": "pulse-json-pointer"
+                      }
+                    }
+                  },
+                  "required": [
+                    "url",
+                    "metrics"
+                  ],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-http_json"
+                }
+              },
+              "required": [
+                "params"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "web.feed",
+                    "web.feed@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "maxLength": 512,
+                      "format": "pulse-public-url"
+                    }
+                  },
+                  "required": [
+                    "url"
+                  ],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-web.feed"
+                }
+              },
+              "required": [
+                "params"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "desktop.notifications",
+                    "desktop.notifications@1"
+                  ]
+                }
+              },
+              "required": [
+                "kind"
+              ]
+            },
+            "then": {
+              "properties": {
+                "params": {
+                  "type": "object",
+                  "properties": {
+                    "apps": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 8,
+                      "items": {
+                        "enum": [
+                          "discord",
+                          "teams",
+                          "outlook",
+                          "slack",
+                          "whatsapp",
+                          "telegram",
+                          "signal",
+                          "spotify",
+                          "chrome",
+                          "edge",
+                          "claude",
+                          "hermes",
+                          "phone_discord"
+                        ]
+                      }
+                    },
+                    "app_ids": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 8,
+                      "items": {
+                        "type": "string",
+                        "maxLength": 200,
+                        "pattern": "^[A-Za-z0-9{](?:[ -~]{0,198}[!-~])?$"
+                      }
+                    },
+                    "types": {
+                      "type": "array",
+                      "minItems": 1,
+                      "maxItems": 2,
+                      "items": {
+                        "enum": [
+                          "toast",
+                          "badge"
+                        ]
+                      },
+                      "default": [
+                        "toast"
+                      ]
+                    },
+                    "preview": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "every": {
+                  "format": "pulse-every-desktop.notifications"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "display": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "score",
+              "rings",
+              "bar",
+              "bars",
+              "stat",
+              "spark"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "score"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "score"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "format": "pulse-display-text"
+                },
+                "style": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "color2": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "track": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "thickness": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 24
+                    },
+                    "radius": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12
+                    },
+                    "glow": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 16
+                    },
+                    "text": {
+                      "enum": [
+                        "s",
+                        "m",
+                        "l"
+                      ]
+                    },
+                    "label": {
+                      "enum": [
+                        "above",
+                        "inline",
+                        "hidden"
+                      ]
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "components": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 4,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "metric": {
+                        "type": "string",
+                        "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                      },
+                      "weight": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                      },
+                      "type": {
+                        "enum": [
+                          "delta",
+                          "level"
+                        ]
+                      },
+                      "baseline": {
+                        "anyOf": [
+                          {
+                            "enum": [
+                              "median",
+                              "oldest",
+                              "source"
+                            ]
+                          },
+                          {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        ]
+                      },
+                      "window": {
+                        "type": "string",
+                        "pattern": "^[0-9]{1,12}[smh]$",
+                        "format": "pulse-duration"
+                      },
+                      "floor": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "sensitivity": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      },
+                      "direction": {
+                        "enum": [
+                          "both",
+                          "up",
+                          "down"
+                        ]
+                      },
+                      "full_at": {
+                        "type": "number",
+                        "exclusiveMinimum": 0
+                      }
+                    },
+                    "required": [
+                      "metric",
+                      "weight",
+                      "type"
+                    ],
+                    "patternProperties": {
+                      "^x-": {}
+                    },
+                    "additionalProperties": false,
+                    "allOf": [
+                      {
+                        "if": {
+                          "properties": {
+                            "type": {
+                              "const": "level"
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "full_at"
+                          ],
+                          "not": {
+                            "anyOf": [
+                              {
+                                "required": [
+                                  "baseline"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "window"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "floor"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "sensitivity"
+                                ]
+                              },
+                              {
+                                "required": [
+                                  "direction"
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "type": {
+                              "const": "delta"
+                            }
+                          }
+                        },
+                        "then": {
+                          "not": {
+                            "required": [
+                              "full_at"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "type",
+                "components"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "rings"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "rings"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "format": "pulse-display-text"
+                },
+                "style": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "color2": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "track": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "thickness": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 24
+                    },
+                    "radius": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12
+                    },
+                    "glow": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 16
+                    },
+                    "text": {
+                      "enum": [
+                        "s",
+                        "m",
+                        "l"
+                      ]
+                    },
+                    "label": {
+                      "enum": [
+                        "above",
+                        "inline",
+                        "hidden"
+                      ]
+                    },
+                    "gap": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 6
+                    },
+                    "cap": {
+                      "enum": [
+                        "round",
+                        "flat"
+                      ]
+                    },
+                    "direction": {
+                      "enum": [
+                        "cw",
+                        "ccw"
+                      ]
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "rings": {
+                  "type": "array",
+                  "minItems": 1,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "enum": [
+                              "auto"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])",
+                            "not": {
+                              "enum": [
+                                "usual"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "max": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "enum": [
+                              "auto",
+                              "usual"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                          }
+                        ]
+                      },
+                      "auto_window": {
+                        "type": "string",
+                        "format": "pulse-auto-window"
+                      },
+                      "value": {
+                        "type": "string",
+                        "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                      },
+                      "label": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "format": "pulse-display-text"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "maxLength": 8,
+                        "format": "pulse-display-text"
+                      },
+                      "zones": {
+                        "type": "object",
+                        "properties": {
+                          "warn": {
+                            "type": "number"
+                          },
+                          "crit": {
+                            "type": "number"
+                          },
+                          "direction": {
+                            "enum": [
+                              "up",
+                              "down"
+                            ]
+                          }
+                        },
+                        "required": [],
+                        "patternProperties": {
+                          "^x-": {}
+                        },
+                        "additionalProperties": false,
+                        "anyOf": [
+                          {
+                            "required": [
+                              "warn"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "crit"
+                            ]
+                          }
+                        ]
+                      },
+                      "style": {
+                        "type": "object",
+                        "properties": {
+                          "color": {
+                            "type": "string",
+                            "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                          }
+                        },
+                        "required": [],
+                        "patternProperties": {
+                          "^x-": {}
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "value"
+                    ],
+                    "patternProperties": {
+                      "^x-": {}
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "type",
+                "rings"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "bar"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "bar"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "format": "pulse-display-text"
+                },
+                "style": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "color2": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "track": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "thickness": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 24
+                    },
+                    "radius": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12
+                    },
+                    "glow": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 16
+                    },
+                    "text": {
+                      "enum": [
+                        "s",
+                        "m",
+                        "l"
+                      ]
+                    },
+                    "label": {
+                      "enum": [
+                        "above",
+                        "inline",
+                        "hidden"
+                      ]
+                    },
+                    "ticks": {
+                      "enum": [
+                        "none",
+                        "usual",
+                        "zones"
+                      ]
+                    },
+                    "show_range": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "min": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "enum": [
+                        "auto"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])",
+                      "not": {
+                        "enum": [
+                          "usual"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "max": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "enum": [
+                        "auto",
+                        "usual"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                    }
+                  ]
+                },
+                "auto_window": {
+                  "type": "string",
+                  "format": "pulse-auto-window"
+                },
+                "value": {
+                  "type": "string",
+                  "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                },
+                "unit": {
+                  "type": "string",
+                  "maxLength": 8,
+                  "format": "pulse-display-text"
+                },
+                "zones": {
+                  "type": "object",
+                  "properties": {
+                    "warn": {
+                      "type": "number"
+                    },
+                    "crit": {
+                      "type": "number"
+                    },
+                    "direction": {
+                      "enum": [
+                        "up",
+                        "down"
+                      ]
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false,
+                  "anyOf": [
+                    {
+                      "required": [
+                        "warn"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "crit"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "bars"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "bars"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "format": "pulse-display-text"
+                },
+                "style": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "color2": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "track": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "thickness": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 24
+                    },
+                    "radius": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12
+                    },
+                    "glow": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 16
+                    },
+                    "text": {
+                      "enum": [
+                        "s",
+                        "m",
+                        "l"
+                      ]
+                    },
+                    "label": {
+                      "enum": [
+                        "above",
+                        "inline",
+                        "hidden"
+                      ]
+                    },
+                    "ticks": {
+                      "enum": [
+                        "none",
+                        "usual",
+                        "zones"
+                      ]
+                    },
+                    "show_range": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "min": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "enum": [
+                        "auto"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])",
+                      "not": {
+                        "enum": [
+                          "usual"
+                        ]
+                      }
+                    }
+                  ]
+                },
+                "max": {
+                  "anyOf": [
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "enum": [
+                        "auto",
+                        "usual"
+                      ]
+                    },
+                    {
+                      "type": "string",
+                      "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                    }
+                  ]
+                },
+                "auto_window": {
+                  "type": "string",
+                  "format": "pulse-auto-window"
+                },
+                "bars": {
+                  "type": "array",
+                  "minItems": 2,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "min": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "enum": [
+                              "auto"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])",
+                            "not": {
+                              "enum": [
+                                "usual"
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      "max": {
+                        "anyOf": [
+                          {
+                            "type": "number"
+                          },
+                          {
+                            "enum": [
+                              "auto",
+                              "usual"
+                            ]
+                          },
+                          {
+                            "type": "string",
+                            "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                          }
+                        ]
+                      },
+                      "auto_window": {
+                        "type": "string",
+                        "format": "pulse-auto-window"
+                      },
+                      "value": {
+                        "type": "string",
+                        "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                      },
+                      "label": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "format": "pulse-display-text"
+                      },
+                      "unit": {
+                        "type": "string",
+                        "maxLength": 8,
+                        "format": "pulse-display-text"
+                      },
+                      "zones": {
+                        "type": "object",
+                        "properties": {
+                          "warn": {
+                            "type": "number"
+                          },
+                          "crit": {
+                            "type": "number"
+                          },
+                          "direction": {
+                            "enum": [
+                              "up",
+                              "down"
+                            ]
+                          }
+                        },
+                        "required": [],
+                        "patternProperties": {
+                          "^x-": {}
+                        },
+                        "additionalProperties": false,
+                        "anyOf": [
+                          {
+                            "required": [
+                              "warn"
+                            ]
+                          },
+                          {
+                            "required": [
+                              "crit"
+                            ]
+                          }
+                        ]
+                      },
+                      "style": {
+                        "type": "object",
+                        "properties": {
+                          "color": {
+                            "type": "string",
+                            "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                          }
+                        },
+                        "required": [],
+                        "patternProperties": {
+                          "^x-": {}
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "required": [
+                      "value"
+                    ],
+                    "patternProperties": {
+                      "^x-": {}
+                    },
+                    "additionalProperties": false
+                  }
+                },
+                "scale": {
+                  "enum": [
+                    "shared",
+                    "independent"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "bars"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "stat"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "stat"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "format": "pulse-display-text"
+                },
+                "style": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "color2": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "track": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "thickness": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 24
+                    },
+                    "radius": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12
+                    },
+                    "glow": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 16
+                    },
+                    "text": {
+                      "enum": [
+                        "s",
+                        "m",
+                        "l"
+                      ]
+                    },
+                    "label": {
+                      "enum": [
+                        "above",
+                        "inline",
+                        "hidden"
+                      ]
+                    },
+                    "delta_colors": {
+                      "enum": [
+                        "semantic",
+                        "neutral"
+                      ]
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "value": {
+                  "type": "string",
+                  "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                },
+                "show": {
+                  "enum": [
+                    "value",
+                    "delta",
+                    "both"
+                  ]
+                },
+                "delta_vs": {
+                  "enum": [
+                    "usual",
+                    "previous"
+                  ]
+                },
+                "unit": {
+                  "type": "string",
+                  "maxLength": 8,
+                  "format": "pulse-display-text"
+                },
+                "states": {
+                  "type": "object", "minProperties": 1, "maxProperties": 8,
+                  "propertyNames": {"pattern": "^-?(?:0|[1-9][0-9]{0,9})(?![\\s\\S])"},
+                  "additionalProperties": {"anyOf": [
+                    {"type": "string", "minLength": 1, "maxLength": 24, "pattern": "^[^<>]*$", "format": "pulse-display-text"},
+                    {"type": "object", "properties": {
+                      "label": {"type": "string", "minLength": 1, "maxLength": 24, "pattern": "^[^<>]*$", "format": "pulse-display-text"},
+                      "tone": {"enum": ["ok", "warn", "crit"]}
+                    }, "required": ["label"], "patternProperties": {"^x-": {}}, "additionalProperties": false}
+                  ]}
+                },
+                "decimals": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 3
+                },
+                "auto_window": {
+                  "type": "string",
+                  "format": "pulse-auto-window"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "spark"
+                }
+              },
+              "required": [
+                "type"
+              ]
+            },
+            "then": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "const": "spark"
+                },
+                "label": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "format": "pulse-display-text"
+                },
+                "style": {
+                  "type": "object",
+                  "properties": {
+                    "color": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "color2": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "track": {
+                      "type": "string",
+                      "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+                    },
+                    "thickness": {
+                      "type": "integer",
+                      "minimum": 2,
+                      "maximum": 24
+                    },
+                    "radius": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 12
+                    },
+                    "glow": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 16
+                    },
+                    "text": {
+                      "enum": [
+                        "s",
+                        "m",
+                        "l"
+                      ]
+                    },
+                    "label": {
+                      "enum": [
+                        "above",
+                        "inline",
+                        "hidden"
+                      ]
+                    },
+                    "fill": {
+                      "enum": [
+                        "none",
+                        "area"
+                      ]
+                    },
+                    "dot": {
+                      "enum": [
+                        "last",
+                        "none"
+                      ]
+                    }
+                  },
+                  "required": [],
+                  "patternProperties": {
+                    "^x-": {}
+                  },
+                  "additionalProperties": false
+                },
+                "value": {
+                  "type": "string",
+                  "pattern": "^(?:[a-z][a-z0-9_]{0,15}\\.)?[A-Za-z][A-Za-z0-9_]{0,39}(?![\\s\\S])"
+                },
+                "points": {
+                  "type": "integer",
+                  "minimum": 8,
+                  "maximum": 48
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ],
+              "patternProperties": {
+                "^x-": {}
+              },
+              "additionalProperties": false
+            }
+          }
+        ]
+      }
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "accent": {
+          "type": "string",
+          "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+        },
+        "surface": {
+          "type": "string",
+          "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+        },
+        "text": {
+          "type": "string",
+          "pattern": "^(?:#[0-9a-fA-F]{3}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{8}|accent|ok|warn|crit|muted|ink)(?![\\s\\S])"
+        },
+        "density": {
+          "enum": [
+            "compact",
+            "cozy",
+            "roomy"
+          ]
+        },
+        "radius": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 24
+        },
+        "font": {
+          "enum": [
+            "system",
+            "rounded",
+            "mono"
+          ]
+        },
+        "motion": {
+          "enum": [
+            "none",
+            "calm",
+            "lively"
+          ]
+        }
+      },
+      "required": [],
+      "patternProperties": {
+        "^x-": {}
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "pulse",
+    "title"
+  ],
+  "patternProperties": {
+    "^x-": {}
+  },
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Stormxftw/Pulsr/blob/main/spec/pulse-1.schema.json",
+  "title": "pulse/1 definition",
+  "$comment": "Normative for shape; register the pulse-* format assertions and apply PULSE-1.md semantics (weight sum, metric references, source baselines). Input is capped at 16 KiB UTF-8 before schema validation.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "discord.invite",
+                  "discord.invite@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "invite": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "format": "pulse-invite"
+                  },
+                  "voice": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                },
+                "required": [
+                  "invite"
+                ],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "params"
+            ]
+          },
+          "every": {
+            "format": "pulse-every-discord.invite"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "github.search",
+                  "github.search@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "repo": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}/[A-Za-z0-9_.-]{1,100}$",
+                    "format": "pulse-repo"
+                  },
+                  "type": {
+                    "enum": [
+                      "pr",
+                      "issue"
+                    ]
+                  },
+                  "title_contains": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9 ._-]{1,40}$"
+                  },
+                  "label": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9 ._-]{1,40}$"
+                  },
+                  "window": {
+                    "enum": [
+                      "24h",
+                      "7d"
+                    ],
+                    "default": "24h"
+                  },
+                  "baseline_days": {
+                    "type": "integer",
+                    "minimum": 7,
+                    "maximum": 30,
+                    "default": 14
+                  }
+                },
+                "required": [
+                  "repo",
+                  "type"
+                ],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "params"
+            ]
+          },
+          "every": {
+            "format": "pulse-every-github.search"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "github.repo",
+                  "github.repo@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "repo": {
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,38}/[A-Za-z0-9_.-]{1,100}$",
+                    "format": "pulse-repo"
+                  },
+                  "activity": {"type": "boolean", "default": false},
+                  "ci": {"type": "boolean", "default": false}
+                  },
+                  "required": [
+                  "repo"
+                  ],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "params"
+            ]
+          },
+          "every": {
+            "format": "pulse-every-github.repo"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "hermes.activity",
+                  "hermes.activity@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "enum": [
+                      "profile"
+                    ],
+                    "default": "profile"
+                  }
+                },
+                "required": [],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "every": {
+            "format": "pulse-every-hermes.activity"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "mcp.tool",
+                  "mcp.tool@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "server": {
+                    "type": "string",
+                    "pattern": "^(?!.*__)[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+                  },
+                  "tool": {
+                    "type": "string",
+                    "pattern": "^(?!.*__)[A-Za-z0-9][A-Za-z0-9_-]{0,63}(?![\\s\\S])"
+                  },
+                  "args": {
+                    "type": "object",
+                    "default": {},
+                    "maxProperties": 32,
+                    "format": "pulse-mcp-args"
+                  },
+                  "metrics": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "maxProperties": 6,
+                    "propertyNames": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "maxLength": 512,
+                      "format": "pulse-json-pointer"
+                    }
+                  }
+                },
+                "required": [
+                  "server",
+                  "tool",
+                  "metrics"
+                ],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "params"
+            ]
+          },
+          "every": {
+            "format": "pulse-every-mcp.tool"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "http_json",
+                  "http_json@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "format": "pulse-public-url"
+                  },
+                  "metrics": {
+                    "type": "object",
+                    "minProperties": 1,
+                    "maxProperties": 6,
+                    "propertyNames": {
+                      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,39}$"
+                    },
+                    "additionalProperties": {
+                      "type": "string",
+                      "maxLength": 512,
+                      "format": "pulse-json-pointer"
+                    }
+                  }
+                },
+                "required": [
+                  "url",
+                  "metrics"
+                ],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "params"
+            ]
+          },
+          "every": {
+            "format": "pulse-every-http_json"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "web.feed",
+                  "web.feed@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "maxLength": 512,
+                    "format": "pulse-public-url"
+                  }
+                },
+                "required": [
+                  "url"
+                ],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "params"
+            ]
+          },
+          "every": {
+            "format": "pulse-every-web.feed"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "source": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "desktop.notifications",
+                  "desktop.notifications@1"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          }
+        },
+        "required": [
+          "source"
+        ]
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "properties": {
+              "params": {
+                "type": "object",
+                "properties": {
+                  "apps": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 8,
+                    "items": {
+                      "enum": [
+                        "discord",
+                        "teams",
+                        "outlook",
+                        "slack",
+                        "whatsapp",
+                        "telegram",
+                        "signal",
+                        "spotify",
+                        "chrome",
+                        "edge",
+                        "claude",
+                        "hermes",
+                        "phone_discord"
+                      ]
+                    }
+                  },
+                  "app_ids": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 8,
+                    "items": {
+                      "type": "string",
+                      "maxLength": 200,
+                      "pattern": "^[A-Za-z0-9{](?:[ -~]{0,198}[!-~])?$"
+                    }
+                  },
+                  "types": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 2,
+                    "items": {
+                      "enum": [
+                        "toast",
+                        "badge"
+                      ]
+                    },
+                    "default": [
+                      "toast"
+                    ]
+                  },
+                  "preview": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [],
+                "patternProperties": {
+                  "^x-": {}
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "every": {
+            "format": "pulse-every-desktop.notifications"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "feeds"
+        ]
+      },
+      "then": {
+        "required": [
+          "display"
+        ],
+        "not": {
+          "anyOf": [
+            {
+              "required": [
+                "every"
+              ]
+            },
+            {
+              "required": [
+                "ring"
+              ]
+            },
+            {
+              "required": [
+                "capsule"
+              ]
+            },
+            {
+              "required": [
+                "lines"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "oneOf": [
+    {
+      "required": [
+        "source"
+      ],
+      "not": {
+        "required": [
+          "feeds"
+        ]
+      }
+    },
+    {
+      "required": [
+        "feeds"
+      ],
+      "not": {
+        "required": [
+          "source"
+        ]
+      }
+    }
+  ]
+}

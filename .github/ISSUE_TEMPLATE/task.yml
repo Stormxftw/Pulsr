@@ -1,0 +1,28 @@
+name: Task
+description: A planned piece of work (QA pass, feature, docs, submission step).
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: One or two sentences on the outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and checklist
+      description: Use a task list (- [ ]) so progress is visible.
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Done when
+      description: Verifiable acceptance criteria (tests, screenshots, live check).
+    validations:
+      required: true
+  - type: input
+    id: branch
+    attributes:
+      label: Branch / worktree

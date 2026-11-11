@@ -1,0 +1,269 @@
+{
+  "captured_at": "2026-11-09T01:52:14.029673+00:00",
+  "requests": 10,
+  "records": [
+    {
+      "path": "/repos/NousResearch/hermes-agent",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-ratelimit-remaining": "59"
+      },
+      "body": {
+        "id": 1024554267,
+        "full_name": "NousResearch/hermes-agent",
+        "stargazers_count": 261781,
+        "forks_count": 58221,
+        "open_issues_count": 53859,
+        "pushed_at": "2026-11-09T01:46:21Z",
+        "default_branch": "main",
+        "archived": false,
+        "size": 1416484
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/NousResearch/hermes-agent/pulls?state=open&per_page=1",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "link": "<https://api.github.com/repositories/1024554267/pulls?state=open&per_page=1&page=2>; rel=\"next\", <https://api.github.com/repositories/1024554267/pulls?state=open&per_page=1&page=34853>; rel=\"last\"",
+        "x-ratelimit-remaining": "58"
+      },
+      "body": [
+        {
+          "number": 151596
+        }
+      ],
+      "empty_body": false
+    },
+    {
+      "path": "/repos/NousResearch/hermes-agent/stats/participation",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-ratelimit-remaining": "57"
+      },
+      "body": {
+        "all": [
+          2,
+          4,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8,
+          5,
+          2,
+          24,
+          53,
+          35,
+          120,
+          287,
+          470,
+          879,
+          646,
+          318,
+          458,
+          874,
+          1006,
+          1202,
+          1005,
+          820,
+          802,
+          753,
+          718,
+          907,
+          858,
+          838,
+          1046,
+          1219,
+          861,
+          1320,
+          1678,
+          1988,
+          1394,
+          1654,
+          1788,
+          1668,
+          5940,
+          3338,
+          5190,
+          5071,
+          3222,
+          3197,
+          3256,
+          2739,
+          1850,
+          2469
+        ],
+        "owner": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/NousResearch/hermes-agent/actions/runs?branch=main&per_page=1",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "link": "<https://api.github.com/repositories/1024554267/actions/runs?branch=main&per_page=1&page=2>; rel=\"next\", <https://api.github.com/repositories/1024554267/actions/runs?branch=main&per_page=1&page=2500>; rel=\"last\"",
+        "x-ratelimit-remaining": "56"
+      },
+      "body": {
+        "total_count": 2500,
+        "workflow_runs": [
+          {
+            "id": 42547365228,
+            "status": "completed",
+            "conclusion": "skipped",
+            "head_branch": "main"
+          }
+        ]
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/Stormxftw/Pulse",
+      "status": 404,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-ratelimit-remaining": "55"
+      },
+      "body": {},
+      "empty_body": false
+    },
+    {
+      "path": "/repos/Stormxftw/Pulse/stats/participation",
+      "status": 404,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-ratelimit-remaining": "54"
+      },
+      "body": {
+        "message": "Not Found",
+        "documentation_url": "https://docs.github.com/rest/metrics/statistics#get-the-weekly-commit-count",
+        "status": "404"
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/Stormxftw/Pulse/actions/runs?branch=main&per_page=1",
+      "status": 404,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-ratelimit-remaining": "53"
+      },
+      "body": {
+        "workflow_runs": []
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/octocat/Hello-World/actions/runs?branch=master&per_page=1",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "link": "<https://api.github.com/repositories/1296269/actions/runs?branch=master&per_page=1&page=2>; rel=\"next\", <https://api.github.com/repositories/1296269/actions/runs?branch=master&per_page=1&page=5>; rel=\"last\"",
+        "x-ratelimit-remaining": "52"
+      },
+      "body": {
+        "total_count": 5,
+        "workflow_runs": [
+          {
+            "id": 41971382452,
+            "status": "completed",
+            "conclusion": "success",
+            "head_branch": "master"
+          }
+        ]
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/atom/atom",
+      "status": 200,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "x-ratelimit-remaining": "51"
+      },
+      "body": {
+        "id": 3228505,
+        "full_name": "atom/atom",
+        "stargazers_count": 60690,
+        "forks_count": 17165,
+        "open_issues_count": 992,
+        "pushed_at": "2023-01-03T10:49:48Z",
+        "default_branch": "master",
+        "archived": true,
+        "size": 330585
+      },
+      "empty_body": false
+    },
+    {
+      "path": "/repos/twitter/bootstrap",
+      "status": 301,
+      "headers": {
+        "content-type": "application/json; charset=utf-8",
+        "location": "https://api.github.com/repositories/2126244",
+        "x-ratelimit-remaining": "50"
+      },
+      "body": {},
+      "empty_body": false
+    }
+  ]
+}

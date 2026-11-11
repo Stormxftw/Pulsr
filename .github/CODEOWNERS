@@ -1,0 +1,8 @@
+# Owner reviews everything; approval, network, secret and MCP code especially.
+*                                   @Stormxftw
+/pulse_rings/mcp_access.py          @Stormxftw
+/pulse_rings/sources/               @Stormxftw
+/pulse_rings/draft_disclosure.py    @Stormxftw
+/pulse_rings/background.py          @Stormxftw
+/dashboard/plugin_api.py            @Stormxftw
+/submission/                        @Stormxftw

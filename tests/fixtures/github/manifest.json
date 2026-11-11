@@ -1,0 +1,19 @@
+{
+  "as_of": "2026-11-07T05:17:57Z",
+  "now": 1794028677.0,
+  "repo": "NousResearch/hermes-agent",
+  "title_contains": "catalog",
+  "window": "24h",
+  "baseline_days": 14,
+  "recent_start": "2026-11-06T05:17:57Z",
+  "baseline_start": "2026-10-23T05:17:57Z",
+  "baseline_end": "2026-11-06T05:17:56Z",
+  "files": {
+    "recent": "20261107T051757Z-recent.json",
+    "baseline": "20261107T051757Z-baseline.json",
+    "repo": "20261107T051757Z-repo.json",
+    "pulls": "20261107T051757Z-pulls.json"
+  },
+  "requests": 4,
+  "authenticated": false
+}

@@ -1,0 +1,15 @@
+pulse: 1
+id: hermes-self
+title: Hermes · this profile
+source: {kind: hermes.activity, params: {scope: profile}}
+every: 30s
+ring:
+  components:
+    - {metric: tool_calls_10m, weight: 80, type: delta, baseline: median, window: 24h, floor: 5, sensitivity: 1.0}
+    - {metric: tool_errors_1h, weight: 20, type: level, full_at: 5}
+capsule: {metric: turns_running, label: "{value} turns running", fill: {full_at: 4}}
+lines:
+  - {metric: waiting_on_you, label: "{value} waiting on you", hide_when_zero: true}
+  - {metric: subagents_running, label: "{value} subagents", hide_when_zero: true}
+alert: {metric: waiting_on_you, above: 0, notify: toast}
+icon: hermes

@@ -1,0 +1,10 @@
+{
+  "provenance": "Read-only public Discord API via curl during Discord QA, 2026-11-08. Reduced to server identity and aggregate counts; no member identities.",
+  "invites": [
+    {"guild": {"id": "1053877538025386074", "name": "Nous Research"}, "approximate_presence_count": 16096, "approximate_member_count": 149839},
+    {"guild": {"id": "1483217544214085663", "name": "TypeSafe AI"}, "approximate_presence_count": 17574, "approximate_member_count": 113302},
+    {"guild": {"id": "879548962464493619", "name": "Hugging Face"}, "approximate_presence_count": 13758, "approximate_member_count": 246834}
+  ],
+  "huggingface_widget_aggregate": {"id": "879548962464493619", "presence_count": 13788, "channels": [], "member_rows": 100, "voice_rows": 0},
+  "notes": "Widget presence_count differs from invite approximate_presence_count and is not a replacement for it. The widget's 100 exposed member rows are a subset, not the server member total. Voice counts describe public-widget-visible activity, not guaranteed complete private voice activity. Initial urllib probes were HTTP 403; curl succeeded. TypeSafe widget response had no widget collections."
+}

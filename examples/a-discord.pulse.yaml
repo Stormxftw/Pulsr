@@ -1,0 +1,16 @@
+pulse: 1
+id: nous-discord
+title: Nous Research
+source: {kind: discord.invite, params: {invite: nousresearch, voice: true}}
+every: 10m
+ring:
+  components:
+    - {metric: online, weight: 70, type: delta, baseline: median, window: 24h, floor: 25, sensitivity: 0.20}
+    - {metric: members, weight: 20, type: delta, baseline: oldest, window: 24h, floor: 100, sensitivity: 0.01}
+    - {metric: voice_channels, weight: 10, type: level, full_at: 5}
+capsule: {metric: online, label: "{value} online", fill: baseline}
+lines:
+  - {metric: members, show: delta, label: "Net {delta} members · {window}"}
+  - {metric: voice_channels, label: "{value} active voice channels"}
+icon: source
+link: https://discord.gg/nousresearch

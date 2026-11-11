@@ -1,0 +1,646 @@
+{
+  "revision": "3b04572",
+  "definitions": {
+    "examples/a-discord.pulse.yaml": {
+      "normalized": {
+        "pulse": 1,
+        "id": "nous-discord",
+        "title": "Nous Research",
+        "source": {
+          "kind": "discord.invite",
+          "params": {
+            "invite": "nousresearch",
+            "voice": true
+          }
+        },
+        "every": "10m",
+        "ring": {
+          "components": [
+            {
+              "metric": "online",
+              "weight": 70,
+              "type": "delta",
+              "baseline": "median",
+              "window": "24h",
+              "floor": 25,
+              "sensitivity": 0.2,
+              "direction": "both"
+            },
+            {
+              "metric": "members",
+              "weight": 20,
+              "type": "delta",
+              "baseline": "oldest",
+              "window": "24h",
+              "floor": 100,
+              "sensitivity": 0.01,
+              "direction": "both"
+            },
+            {
+              "metric": "voice_channels",
+              "weight": 10,
+              "type": "level",
+              "full_at": 5
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "online",
+          "label": "{value} online",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "members",
+            "show": "delta",
+            "label": "Net {delta} members · {window}",
+            "hide_when_zero": false
+          },
+          {
+            "metric": "voice_channels",
+            "label": "{value} active voice channels",
+            "show": "value",
+            "hide_when_zero": false
+          }
+        ],
+        "icon": "source",
+        "link": "https://discord.gg/nousresearch"
+      },
+      "budget": {
+        "hosts": [
+          "discord.com",
+          "cdn.discordapp.com"
+        ],
+        "req_per_hour": 10.0,
+        "req_per_hour_display": 10
+      }
+    },
+    "examples/b-github.pulse.yaml": {
+      "normalized": {
+        "pulse": 1,
+        "id": "hermes-agent-catalog-prs",
+        "title": "hermes-agent · catalog PRs",
+        "source": {
+          "kind": "github.search",
+          "params": {
+            "repo": "NousResearch/hermes-agent",
+            "type": "pr",
+            "title_contains": "catalog",
+            "window": "24h",
+            "baseline_days": 14
+          }
+        },
+        "every": "15m",
+        "ring": {
+          "components": [
+            {
+              "metric": "recent",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "source",
+              "sensitivity": 1.0,
+              "direction": "both",
+              "window": "24h",
+              "floor": 1
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "recent",
+          "label": "{value} PRs / 24h",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "baseline",
+            "label": "usual ≈{value}/day · 14-day avg",
+            "show": "value",
+            "hide_when_zero": false
+          }
+        ],
+        "alert": {
+          "ring_at_least": 70,
+          "notify": "toast"
+        },
+        "icon": "source",
+        "link": "https://github.com/NousResearch/hermes-agent/pulls"
+      },
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 4.166666666666667,
+        "req_per_hour_display": 5
+      }
+    },
+    "examples/c-hermes.pulse.yaml": {
+      "normalized": {
+        "pulse": 1,
+        "id": "hermes-self",
+        "title": "Hermes · this profile",
+        "source": {
+          "kind": "hermes.activity",
+          "params": {
+            "scope": "profile"
+          }
+        },
+        "every": "30s",
+        "ring": {
+          "components": [
+            {
+              "metric": "tool_calls_10m",
+              "weight": 80,
+              "type": "delta",
+              "baseline": "median",
+              "window": "24h",
+              "floor": 5,
+              "sensitivity": 1.0,
+              "direction": "both"
+            },
+            {
+              "metric": "tool_errors_1h",
+              "weight": 20,
+              "type": "level",
+              "full_at": 5
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "turns_running",
+          "label": "{value} turns running",
+          "fill": {
+            "full_at": 4
+          }
+        },
+        "lines": [
+          {
+            "metric": "waiting_on_you",
+            "label": "{value} waiting on you",
+            "hide_when_zero": true,
+            "show": "value"
+          },
+          {
+            "metric": "subagents_running",
+            "label": "{value} subagents",
+            "hide_when_zero": true,
+            "show": "value"
+          }
+        ],
+        "alert": {
+          "metric": "waiting_on_you",
+          "above": 0,
+          "notify": "toast"
+        },
+        "icon": "hermes"
+      },
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 0.0,
+        "req_per_hour_display": 0
+      }
+    },
+    "examples/d-http-json.pulse.yaml": {
+      "normalized": {
+        "pulse": 1,
+        "title": "Dota 2 · players now",
+        "source": {
+          "kind": "http_json",
+          "params": {
+            "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=570",
+            "metrics": {
+              "players": "/response/player_count"
+            }
+          }
+        },
+        "ring": {
+          "components": [
+            {
+              "metric": "players",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "median",
+              "window": "24h",
+              "sensitivity": 0.3,
+              "floor": 1,
+              "direction": "both"
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "players",
+          "label": "{value} playing",
+          "fill": "baseline"
+        },
+        "id": "dota-2-players-now",
+        "every": "5m",
+        "lines": [],
+        "icon": "source",
+        "link": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=570"
+      },
+      "budget": {
+        "hosts": [
+          "api.steampowered.com"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      }
+    },
+    "tests/fixtures/normalized/discord-reference.json": {
+      "normalized": {
+        "pulse": 1,
+        "id": "nous-discord",
+        "title": "Nous Research",
+        "source": {
+          "kind": "discord.invite",
+          "params": {
+            "invite": "nousresearch",
+            "voice": true
+          }
+        },
+        "every": "10m",
+        "ring": {
+          "components": [
+            {
+              "metric": "online",
+              "weight": 70,
+              "type": "delta",
+              "baseline": "median",
+              "window": "24h",
+              "floor": 25,
+              "sensitivity": 0.2,
+              "direction": "both"
+            },
+            {
+              "metric": "members",
+              "weight": 20,
+              "type": "delta",
+              "baseline": "oldest",
+              "window": "24h",
+              "floor": 100,
+              "sensitivity": 0.01,
+              "direction": "both"
+            },
+            {
+              "metric": "voice_channels",
+              "weight": 10,
+              "type": "level",
+              "full_at": 5
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "online",
+          "label": "{value} online",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "members",
+            "show": "delta",
+            "label": "Net {delta} members · {window}",
+            "hide_when_zero": false
+          },
+          {
+            "metric": "voice_channels",
+            "show": "value",
+            "label": "{value} active voice channels",
+            "hide_when_zero": false
+          }
+        ],
+        "icon": "source",
+        "link": "https://discord.gg/nousresearch"
+      },
+      "budget": {
+        "hosts": [
+          "discord.com",
+          "cdn.discordapp.com"
+        ],
+        "req_per_hour": 10.0,
+        "req_per_hour_display": 10
+      }
+    },
+    "tests/fixtures/ui/approval.json/drafts/0/definition": {
+      "normalized": {
+        "pulse": 1,
+        "id": "catalog-prs",
+        "title": "hermes-agent · catalog PRs",
+        "source": {
+          "kind": "github.search",
+          "params": {
+            "repo": "NousResearch/hermes-agent",
+            "type": "pr",
+            "title_contains": "catalog",
+            "window": "24h",
+            "baseline_days": 14
+          }
+        },
+        "alert": {
+          "ring_at_least": 70,
+          "notify": "none"
+        },
+        "every": "15m",
+        "ring": {
+          "components": [
+            {
+              "metric": "recent",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "source",
+              "sensitivity": 1.0,
+              "direction": "both",
+              "window": "24h",
+              "floor": 1
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "recent",
+          "label": "{value} PRs / 24h",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "baseline",
+            "label": "usual ≈{value}/24h · 14-day avg",
+            "show": "value",
+            "hide_when_zero": false
+          }
+        ],
+        "icon": "source",
+        "link": "https://github.com/NousResearch/hermes-agent/pulls"
+      },
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 4.166666666666667,
+        "req_per_hour_display": 5
+      }
+    },
+    "tests/fixtures/ui/arbitrary-host.json/drafts/0/definition": {
+      "normalized": {
+        "pulse": 1,
+        "id": "public-count",
+        "title": "Public count",
+        "source": {
+          "kind": "http_json",
+          "params": {
+            "url": "https://api.example.org/v1/count?region=world",
+            "metrics": {
+              "count": "/count"
+            }
+          }
+        },
+        "every": "5m",
+        "ring": {
+          "components": [
+            {
+              "metric": "count",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "median",
+              "window": "24h",
+              "floor": 1,
+              "sensitivity": 1.0,
+              "direction": "both"
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "count",
+          "label": "{value}",
+          "fill": "baseline"
+        },
+        "lines": [],
+        "icon": "source",
+        "link": "https://api.example.org/v1/count?region=world"
+      },
+      "budget": {
+        "hosts": [
+          "api.example.org"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      }
+    },
+    "tests/fixtures/ui/mcp.json/drafts/0/definition": {
+      "normalized": {
+        "pulse": 1,
+        "id": "mcp-pending",
+        "title": "MCP pending",
+        "source": {
+          "kind": "mcp.tool",
+          "params": {
+            "server": "probe",
+            "tool": "read_metrics",
+            "args": {
+              "filter": "<img src=x onerror=\"window.MCP_XSS=1\">",
+              "padding": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+            },
+            "metrics": {
+              "count": "/count"
+            },
+            "x-read-only": true
+          }
+        },
+        "ring": {
+          "components": [
+            {
+              "metric": "count",
+              "weight": 100,
+              "type": "level",
+              "full_at": 100
+            }
+          ]
+        },
+        "every": "15m",
+        "capsule": {
+          "metric": "count",
+          "label": "{value}",
+          "fill": "baseline"
+        },
+        "lines": [],
+        "icon": "source"
+      },
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 4.0,
+        "req_per_hour_display": 4
+      }
+    },
+    "tests/fixtures/ui/pending.json/drafts/0/definition": {
+      "normalized": {
+        "pulse": 1,
+        "id": "catalog-prs",
+        "title": "hermes-agent · catalog PRs",
+        "source": {
+          "kind": "github.search",
+          "params": {
+            "repo": "NousResearch/hermes-agent",
+            "type": "pr",
+            "title_contains": "catalog",
+            "window": "24h",
+            "baseline_days": 14
+          }
+        },
+        "alert": {
+          "ring_at_least": 70,
+          "notify": "none"
+        },
+        "every": "15m",
+        "ring": {
+          "components": [
+            {
+              "metric": "recent",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "source",
+              "sensitivity": 1.0,
+              "direction": "both",
+              "window": "24h",
+              "floor": 1
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "recent",
+          "label": "{value} PRs / 24h",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "baseline",
+            "label": "usual ≈{value}/24h · 14-day avg",
+            "show": "value",
+            "hide_when_zero": false
+          }
+        ],
+        "icon": "source",
+        "link": "https://github.com/NousResearch/hermes-agent/pulls"
+      },
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 4.166666666666667,
+        "req_per_hour_display": 5
+      }
+    },
+    "tests/fixtures/ui/sampling.json/drafts/0/definition": {
+      "normalized": {
+        "pulse": 1,
+        "id": "catalog-prs",
+        "title": "hermes-agent · catalog PRs",
+        "source": {
+          "kind": "github.search",
+          "params": {
+            "repo": "NousResearch/hermes-agent",
+            "type": "pr",
+            "title_contains": "catalog",
+            "window": "24h",
+            "baseline_days": 14
+          }
+        },
+        "alert": {
+          "ring_at_least": 70,
+          "notify": "none"
+        },
+        "every": "15m",
+        "ring": {
+          "components": [
+            {
+              "metric": "recent",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "source",
+              "sensitivity": 1.0,
+              "direction": "both",
+              "window": "24h",
+              "floor": 1
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "recent",
+          "label": "{value} PRs / 24h",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "baseline",
+            "label": "usual ≈{value}/24h · 14-day avg",
+            "show": "value",
+            "hide_when_zero": false
+          }
+        ],
+        "icon": "source",
+        "link": "https://github.com/NousResearch/hermes-agent/pulls"
+      },
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 4.166666666666667,
+        "req_per_hour_display": 5
+      }
+    },
+    "tests/fixtures/ui/states.json/drafts/0/definition": {
+      "normalized": {
+        "pulse": 1,
+        "id": "catalog-prs",
+        "title": "hermes-agent · catalog PRs",
+        "source": {
+          "kind": "github.search",
+          "params": {
+            "repo": "NousResearch/hermes-agent",
+            "type": "pr",
+            "title_contains": "catalog",
+            "window": "24h",
+            "baseline_days": 14
+          }
+        },
+        "alert": {
+          "ring_at_least": 70,
+          "notify": "none"
+        },
+        "every": "15m",
+        "ring": {
+          "components": [
+            {
+              "metric": "recent",
+              "weight": 100,
+              "type": "delta",
+              "baseline": "source",
+              "sensitivity": 1.0,
+              "direction": "both",
+              "window": "24h",
+              "floor": 1
+            }
+          ]
+        },
+        "capsule": {
+          "metric": "recent",
+          "label": "{value} PRs / 24h",
+          "fill": "baseline"
+        },
+        "lines": [
+          {
+            "metric": "baseline",
+            "label": "usual ≈{value}/24h · 14-day avg",
+            "show": "value",
+            "hide_when_zero": false
+          }
+        ],
+        "icon": "source",
+        "link": "https://github.com/NousResearch/hermes-agent/pulls"
+      },
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 4.166666666666667,
+        "req_per_hour_display": 5
+      }
+    }
+  }
+}

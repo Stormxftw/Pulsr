@@ -1,0 +1,23 @@
+    if (!visible || detailView) return;
+    const now = data?.as_of || seconds();
+    for (const p of data?.pulses || []) {
+      const lastKey = `alerted-reason:${p.id}`;
+      const previous = ctx.storage.get(lastKey, null);
+      const reason = p.alert?.active ? p.alert.reason : null;
+      if (previous && previous !== reason) {
+        const key = `alerted:${p.id}:${previous}`;
+        const old = ctx.storage.get(key, {});
+        ctx.storage.set(key, { ...old, active: false });
+      }
+      ctx.storage.set(lastKey, reason);
+      if (!reason) continue;
+      const key = `alerted:${p.id}:${reason}`;
+      const old = ctx.storage.get(key, {});
+      const notify = ["toast", "os", "pet"].includes(p.alert.notify);
+      const fire =
+        notify && !old.active && (old.at == null || now - old.at >= 1800);
+      // Store before notifying: multiple views share the same deduplication gate.
+      ctx.storage.set(key, { active: true, at: fire ? now : old.at });
+      if (fire)
+        host.notify({ kind: "warning", message: `${p.title}: ${reason}` });
+    }

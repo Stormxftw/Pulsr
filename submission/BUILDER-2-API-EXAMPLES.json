@@ -1,0 +1,758 @@
+{
+  "GET /builder/templates": {
+    "response": [
+      {
+        "id": "discord",
+        "title": "Discord server",
+        "description": "Members, people online and active voice channels.",
+        "icon": {
+          "kind": "brand",
+          "slug": "discord",
+          "hex": "5865F2",
+          "path": "M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z",
+          "title": "Discord"
+        },
+        "kind": "discord.invite",
+        "fields": [
+          {
+            "key": "invite",
+            "label": "Discord invite link",
+            "help": "Paste an invite link or the original invite code. Parsed offline.",
+            "type": "text",
+            "placeholder": "https://discord.gg/hermes",
+            "required": true
+          }
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "github-repo",
+        "title": "GitHub repo",
+        "description": "Stars, forks, issues; optional commits, last push and CI.",
+        "icon": {
+          "kind": "brand",
+          "slug": "github",
+          "hex": "181717",
+          "path": "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+          "title": "GitHub"
+        },
+        "kind": "github.repo",
+        "fields": [
+          {
+            "key": "repo",
+            "label": "Repository",
+            "help": "Paste a GitHub repository URL or owner/name. No network call.",
+            "type": "text",
+            "placeholder": "NousResearch/hermes-agent",
+            "required": true
+          },
+          {"key": "commits", "label": "Commits this week", "help": "Opt in to hourly participation stats and a previous-12-week baseline (+1 req/h).", "type": "checkbox", "placeholder": "", "required": false},
+          {"key": "last_push", "label": "Last push", "help": "Uses pushed_at from the repo response. Enables activity stats (+1 req/h shared with commits).", "type": "checkbox", "placeholder": "", "required": false},
+          {"key": "ci", "label": "CI build status", "help": "Latest default-branch Actions run; requires Actions read access (+1 call per poll).", "type": "checkbox", "placeholder": "", "required": false}
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "github-search",
+        "title": "GitHub PRs/issues search",
+        "description": "Recent work compared with its usual pace.",
+        "icon": {
+          "kind": "brand",
+          "slug": "github",
+          "hex": "181717",
+          "path": "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+          "title": "GitHub"
+        },
+        "kind": "github.search",
+        "fields": [
+          {
+            "key": "repo",
+            "label": "Repository",
+            "help": "Paste a GitHub repository URL or owner/name. No network call.",
+            "type": "text",
+            "placeholder": "NousResearch/hermes-agent",
+            "required": true
+          },
+          {
+            "key": "type",
+            "label": "What to count",
+            "help": "Choose pull requests or issues.",
+            "type": "select",
+            "placeholder": "",
+            "required": true,
+            "options": [
+              {
+                "value": "pr",
+                "label": "Pull requests"
+              },
+              {
+                "value": "issue",
+                "label": "Issues"
+              }
+            ]
+          },
+          {
+            "key": "title_contains",
+            "label": "Words in the title",
+            "help": "Optional plain words, not a search expression.",
+            "type": "text",
+            "placeholder": "",
+            "required": false
+          },
+          {
+            "key": "label",
+            "label": "Label",
+            "help": "Optional exact GitHub label.",
+            "type": "text",
+            "placeholder": "",
+            "required": false
+          },
+          {
+            "key": "window",
+            "label": "Time to count",
+            "help": "Compare equal time windows.",
+            "type": "select",
+            "placeholder": "",
+            "required": false,
+            "options": [
+              {
+                "value": "24h",
+                "label": "24 hours"
+              },
+              {
+                "value": "7d",
+                "label": "7 days"
+              }
+            ]
+          }
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "weather",
+        "title": "Weather & air",
+        "description": "Current weather and air quality from Open-Meteo.",
+        "icon": {
+          "kind": "emoji",
+          "text": "🌦️"
+        },
+        "kind": "http_json",
+        "fields": [
+          {
+            "key": "city",
+            "label": "City",
+            "help": "Find sends this text to geocoding-api.open-meteo.com once; select a result or enter coordinates.",
+            "type": "text",
+            "placeholder": "",
+            "required": false
+          },
+          {
+            "key": "latitude",
+            "label": "Latitude",
+            "help": "Selected city coordinate, from −90 to 90.",
+            "type": "number",
+            "placeholder": "",
+            "required": true
+          },
+          {
+            "key": "longitude",
+            "label": "Longitude",
+            "help": "Selected city coordinate, from −180 to 180.",
+            "type": "number",
+            "placeholder": "",
+            "required": true
+          },
+          {
+            "key": "units",
+            "label": "Units",
+            "help": "US units by default; air quality always uses US AQI.",
+            "type": "select",
+            "placeholder": "",
+            "required": false,
+            "options": [
+              {
+                "value": "imperial",
+                "label": "Fahrenheit · mph · inches"
+              },
+              {
+                "value": "metric",
+                "label": "Celsius · km/h · mm"
+              }
+            ]
+          }
+        ],
+        "lookup": "city",
+        "test": null
+      },
+      {
+        "id": "steam",
+        "title": "Game players (Steam)",
+        "description": "How many people are playing right now.",
+        "icon": {
+          "kind": "brand",
+          "slug": "steam",
+          "hex": "000000",
+          "path": "M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z",
+          "title": "Steam"
+        },
+        "kind": "http_json",
+        "fields": [
+          {
+            "key": "appid",
+            "label": "Steam store link or app ID",
+            "help": "Paste a store link or app ID offline. Find game names sends one call to store.steampowered.com.",
+            "type": "text",
+            "placeholder": "https://store.steampowered.com/app/730/",
+            "required": true
+          },
+          {
+            "key": "name",
+            "label": "Game name",
+            "help": "Optional display title from your chosen result.",
+            "type": "text",
+            "placeholder": "",
+            "required": false
+          }
+        ],
+        "lookup": "steam",
+        "test": null
+      },
+      {
+        "id": "json",
+        "title": "Any website JSON",
+        "description": "Watch numbers from a public HTTPS JSON response.",
+        "icon": {
+          "kind": "emoji",
+          "text": "🌐"
+        },
+        "kind": "http_json",
+        "fields": [
+          {
+            "key": "url",
+            "label": "Public JSON URL",
+            "help": "Public HTTPS only. Paste pointers from a result you inspected; this form never fetches the URL.",
+            "type": "url",
+            "placeholder": "https://example.org/metrics.json",
+            "required": true
+          },
+          {
+            "key": "metrics",
+            "label": "Numbers to watch",
+            "help": "JSON object mapping names to JSON Pointers you picked from an inspected result; 1–6 numbers.",
+            "type": "text",
+            "placeholder": "{\"used\":\"/used\",\"limit\":\"/limit\"}",
+            "required": true
+          }
+        ],
+        "lookup": null,
+        "test": "json"
+      },
+      {
+        "id": "mcp",
+        "title": "MCP tool",
+        "description": "Read numbers from a connected, read-only Hermes tool.",
+        "icon": {
+          "kind": "emoji",
+          "text": "🔌"
+        },
+        "kind": "mcp.tool",
+        "fields": [
+          {
+            "key": "server",
+            "label": "Connected server",
+            "help": "Exact server name from the connected tools list.",
+            "type": "text",
+            "placeholder": "",
+            "required": true
+          },
+          {
+            "key": "tool",
+            "label": "Read-only tool",
+            "help": "Exact tool name. Hermes grant and read-only policy still apply.",
+            "type": "text",
+            "placeholder": "",
+            "required": true
+          },
+          {
+            "key": "args",
+            "label": "Tool inputs",
+            "help": "Optional JSON object; no secrets. Inputs are saved in the definition.",
+            "type": "text",
+            "placeholder": "{}",
+            "required": false
+          },
+          {
+            "key": "metrics",
+            "label": "Numbers to watch",
+            "help": "JSON object mapping names to JSON Pointers you picked from an inspected result; 1–6 numbers.",
+            "type": "text",
+            "placeholder": "{\"used\":\"/used\",\"limit\":\"/limit\"}",
+            "required": true
+          }
+        ],
+        "lookup": null,
+        "test": "mcp"
+      },
+      {
+        "id": "hermes",
+        "title": "Hermes activity",
+        "description": "Running work, tool calls and errors in this profile.",
+        "icon": {
+          "kind": "brand",
+          "slug": "hermes",
+          "hex": "8B7CF8",
+          "path": "M5 3h4v7h6V3h4v18h-4v-7H9v7H5V3ZM0 4h4v3H2L0 4Zm24 0-2 3h-2V4h4Z"
+        },
+        "kind": "hermes.activity",
+        "fields": [
+          {
+            "key": "scope",
+            "label": "Watch",
+            "help": "Local counters only; no network call.",
+            "type": "select",
+            "placeholder": "",
+            "required": false,
+            "options": [
+              {
+                "value": "profile",
+                "label": "This profile"
+              }
+            ]
+          }
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "notifications",
+        "title": "Desktop notifications",
+        "description": "Notifications still in Action Center, not unread messages (Windows).",
+        "icon": {
+          "kind": "emoji",
+          "text": "🔔"
+        },
+        "kind": "desktop.notifications",
+        "fields": [
+          {
+            "key": "app",
+            "label": "App",
+            "help": "Counts and times only; never message text. Reads the local Windows notification store read-only, no network. New counts need a continuously watched full window.",
+            "type": "select",
+            "placeholder": "",
+            "required": false,
+            "options": [
+              {
+                "value": "discord",
+                "label": "Discord"
+              },
+              {
+                "value": "teams",
+                "label": "Microsoft Teams"
+              },
+              {
+                "value": "outlook",
+                "label": "Outlook"
+              },
+              {
+                "value": "slack",
+                "label": "Slack"
+              },
+              {
+                "value": "whatsapp",
+                "label": "WhatsApp"
+              },
+              {
+                "value": "telegram",
+                "label": "Telegram"
+              },
+              {
+                "value": "signal",
+                "label": "Signal"
+              },
+              {
+                "value": "spotify",
+                "label": "Spotify"
+              },
+              {
+                "value": "chrome",
+                "label": "Google Chrome"
+              },
+              {
+                "value": "edge",
+                "label": "Microsoft Edge"
+              },
+              {
+                "value": "claude",
+                "label": "Claude"
+              },
+              {
+                "value": "hermes",
+                "label": "Hermes"
+              },
+              {
+                "value": "phone_discord",
+                "label": "Discord (phone)"
+              }
+            ]
+          },
+          {
+            "key": "app_id",
+            "label": "Other app ID",
+            "help": "Optional exact Windows app ID (AUMID) for an app not in the list.",
+            "type": "text",
+            "placeholder": "",
+            "required": false
+          },
+          {
+            "key": "preview",
+            "label": "Show message previews",
+            "help": "Off by default. Shows who waiting notifications are from and their text in this pane only, cut short; never saved or sent to Hermes. Shown on the approval card.",
+            "type": "checkbox",
+            "placeholder": "",
+            "required": false
+          }
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "releases",
+        "title": "GitHub releases",
+        "description": "New releases of a repository, by name.",
+        "icon": {
+          "kind": "brand",
+          "slug": "github",
+          "hex": "181717",
+          "path": "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+          "title": "GitHub"
+        },
+        "kind": "web.feed",
+        "fields": [
+          {
+            "key": "repo",
+            "label": "Repository",
+            "help": "Paste a GitHub repository URL or owner/name. After approval this reads the public release feed on github.com; no network call now.",
+            "type": "text",
+            "placeholder": "NousResearch/hermes-agent",
+            "required": true
+          }
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "posts",
+        "title": "New posts (RSS / Atom)",
+        "description": "Latest posts from a blog, release page, channel or subreddit feed.",
+        "icon": {
+          "kind": "brand",
+          "slug": "rss",
+          "hex": "FFA500",
+          "path": "M19.199 24C19.199 13.467 10.533 4.8 0 4.8V0c13.165 0 24 10.835 24 24h-4.801zM3.291 17.415c1.814 0 3.293 1.479 3.293 3.295 0 1.813-1.485 3.29-3.301 3.29C1.47 24 0 22.526 0 20.71s1.475-3.294 3.291-3.295zM15.909 24h-4.665c0-6.169-5.075-11.245-11.244-11.245V8.09c8.727 0 15.909 7.184 15.909 15.91z",
+          "title": "RSS"
+        },
+        "kind": "web.feed",
+        "fields": [
+          {
+            "key": "url",
+            "label": "Feed address",
+            "help": "Public HTTPS RSS, Atom or JSON feed. Post titles are shown in the pane and never sent to the model. This form never fetches the address.",
+            "type": "url",
+            "placeholder": "https://example.org/feed.xml",
+            "required": true
+          },
+          {
+            "key": "name",
+            "label": "Name",
+            "help": "Optional title for the pulse.",
+            "type": "text",
+            "placeholder": "",
+            "required": false
+          }
+        ],
+        "lookup": null,
+        "test": null
+      },
+      {
+        "id": "blank",
+        "title": "Start blank",
+        "description": "Choose your own public JSON source and numbers; nothing is preconfigured.",
+        "icon": {
+          "kind": "emoji",
+          "text": "✨"
+        },
+        "kind": "http_json",
+        "fields": [
+          {
+            "key": "url",
+            "label": "Public JSON URL",
+            "help": "Public HTTPS only. Paste pointers from a result you inspected; this form never fetches the URL.",
+            "type": "url",
+            "placeholder": "https://example.org/metrics.json",
+            "required": true
+          },
+          {
+            "key": "metrics",
+            "label": "Numbers to watch",
+            "help": "JSON object mapping names to JSON Pointers you picked from an inspected result; 1–6 numbers.",
+            "type": "text",
+            "placeholder": "{\"used\":\"/used\",\"limit\":\"/limit\"}",
+            "required": true
+          }
+        ],
+        "lookup": null,
+        "test": "json"
+      }
+    ]
+  },
+  "POST /builder/from-template": {
+    "request": {
+      "template": "steam",
+      "values": {
+        "appid": "730"
+      }
+    },
+    "response": {
+      "ok": true,
+      "errors": [],
+      "feeds": {
+        "main": {
+          "kind": "http_json",
+          "params": {
+            "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+            "metrics": {
+              "players": "/response/player_count"
+            }
+          },
+          "every": "10m"
+        }
+      },
+      "metrics": [
+        {
+          "ref": "main.players",
+          "label": "Playing right now",
+          "unit": "",
+          "hint": "count",
+          "default_selected": true
+        }
+      ],
+      "suggested_title": "Steam 730 · live players",
+      "suggested_icon": {
+        "brand": "steam"
+      }
+    }
+  },
+  "POST /builder/layouts": {
+    "request": {
+      "feeds": {
+        "main": {
+          "kind": "http_json",
+          "params": {
+            "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+            "metrics": {
+              "players": "/response/player_count"
+            }
+          },
+          "every": "10m"
+        }
+      },
+      "metrics": [
+        "main.players"
+      ],
+      "title": "Steam 730 · live players",
+      "icon": {
+        "brand": "steam"
+      }
+    },
+    "response": [
+      {
+        "id": "number-trend",
+        "title": "Big number + trend",
+        "description": "A headline number, supporting values and room for history.",
+        "why": "Read the current value first; measured history supplies change, never an invented target.",
+        "definition": {
+          "pulse": 1,
+          "title": "Steam 730 · live players",
+          "icon": {
+            "brand": "steam"
+          },
+          "feeds": {
+            "main": {
+              "kind": "http_json",
+              "params": {
+                "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+                "metrics": {
+                  "players": "/response/player_count"
+                }
+              },
+              "every": "10m"
+            }
+          },
+          "display": [
+            {
+              "type": "stat",
+              "show": "both",
+              "value": "main.players",
+              "label": "Playing right now",
+              "delta_vs": "usual",
+              "auto_window": "7d"
+            },
+            {
+              "type": "spark",
+              "value": "main.players",
+              "label": "Trend",
+              "points": 24
+            }
+          ],
+          "id": "steam-730-live-players"
+        }
+      },
+      {
+        "id": "gauge",
+        "title": "Gauge ring",
+        "description": "A clear ring for the main numbers, with supporting bars.",
+        "why": "Uses matching source limits, natural ranges, then a learned usual or automatic range; full selections leave less room for denominator bindings.",
+        "definition": {
+          "pulse": 1,
+          "title": "Steam 730 · live players",
+          "icon": {
+            "brand": "steam"
+          },
+          "feeds": {
+            "main": {
+              "kind": "http_json",
+              "params": {
+                "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+                "metrics": {
+                  "players": "/response/player_count"
+                }
+              },
+              "every": "10m"
+            }
+          },
+          "display": [
+            {
+              "type": "rings",
+              "rings": [
+                {
+                  "value": "main.players",
+                  "label": "Playing right now",
+                  "max": "usual",
+                  "min": 0,
+                  "auto_window": "7d"
+                }
+              ]
+            }
+          ],
+          "id": "steam-730-live-players"
+        }
+      },
+      {
+        "id": "bar-trend",
+        "title": "Bar + trend",
+        "description": "One horizontal gauge above the measured trend.",
+        "why": "A compact alternative to a ring with the same range rules.",
+        "definition": {
+          "pulse": 1,
+          "title": "Steam 730 · live players",
+          "icon": {
+            "brand": "steam"
+          },
+          "feeds": {
+            "main": {
+              "kind": "http_json",
+              "params": {
+                "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+                "metrics": {
+                  "players": "/response/player_count"
+                }
+              },
+              "every": "10m"
+            }
+          },
+          "display": [
+            {
+              "type": "bar",
+              "value": "main.players",
+              "label": "Playing right now",
+              "max": "usual",
+              "min": 0,
+              "auto_window": "7d"
+            },
+            {
+              "type": "spark",
+              "value": "main.players",
+              "points": 24,
+              "label": "Players"
+            }
+          ],
+          "id": "steam-730-live-players"
+        }
+      },
+      {
+        "id": "change",
+        "title": "Change vs usual",
+        "description": "A change ring with supporting numbers.",
+        "why": "Shows unusualness, not a measured percentage. Learns from history unless the source reports its own baseline.",
+        "definition": {
+          "pulse": 1,
+          "title": "Steam 730 · live players",
+          "icon": {
+            "brand": "steam"
+          },
+          "feeds": {
+            "main": {
+              "kind": "http_json",
+              "params": {
+                "url": "https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=730",
+                "metrics": {
+                  "players": "/response/player_count"
+                }
+              },
+              "every": "10m"
+            }
+          },
+          "display": [
+            {
+              "type": "score",
+              "label": "Change vs usual",
+              "components": [
+                {
+                  "metric": "main.players",
+                  "type": "delta",
+                  "weight": 100,
+                  "baseline": "median",
+                  "window": "24h",
+                  "floor": 1,
+                  "sensitivity": 1.0,
+                  "direction": "both"
+                }
+              ]
+            }
+          ],
+          "id": "steam-730-live-players"
+        }
+      }
+    ]
+  },
+  "POST /builder/lookup": {
+    "request": {
+      "kind": "steam",
+      "q": "730",
+      "confirm": true
+    },
+    "response": {
+      "results": [
+        {
+          "name": "Steam app 730",
+          "appid": 730
+        }
+      ],
+      "calls": 0,
+      "persisted": false
+    }
+  }
+}

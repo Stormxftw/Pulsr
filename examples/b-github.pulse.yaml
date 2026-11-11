@@ -1,0 +1,16 @@
+pulse: 1
+id: hermes-agent-catalog-prs
+title: hermes-agent · catalog PRs
+source:
+  kind: github.search
+  params: {repo: NousResearch/hermes-agent, type: pr, title_contains: catalog, window: 24h, baseline_days: 14}
+every: 15m
+ring:
+  components:
+    - {metric: recent, weight: 100, type: delta, baseline: source, sensitivity: 1.0, direction: both}
+capsule: {metric: recent, label: "{value} PRs / 24h", fill: baseline}
+lines:
+  - {metric: baseline, label: "usual ≈{value}/day · 14-day avg"}
+alert: {ring_at_least: 70, notify: toast}
+icon: source
+link: https://github.com/NousResearch/hermes-agent/pulls

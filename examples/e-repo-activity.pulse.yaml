@@ -1,0 +1,33 @@
+# Private repo: configure PULSE_RINGS_GITHUB_TOKEN in Hermes Settings yourself.
+# Read-only repository contents/metadata + Actions read. Never put the token here.
+# api.github.com only: 3 calls/poll + participation hourly = 19 req/h at 10m.
+pulse: 1
+id: pulse-rings-repo
+title: Pulsr repo
+source:
+  kind: github.repo
+  params:
+    repo: Stormxftw/Pulse
+    activity: true
+    ci: true
+every: 10m
+icon: {brand: github}
+link: https://github.com/Stormxftw/Pulse
+display:
+  - type: score
+    label: Commits this week vs usual
+    components:
+      - metric: commits_week
+        weight: 100
+        type: delta
+        baseline: source
+  - type: stat
+    value: hours_since_push
+    label: Last push
+    unit: duration
+  - type: stat
+    value: ci_passing
+    label: CI build
+    states:
+      "0": {label: Failing, tone: crit}
+      "1": {label: Passing, tone: ok}

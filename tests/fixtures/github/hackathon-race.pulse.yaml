@@ -1,0 +1,17 @@
+pulse: 1
+id: hackathon-race
+title: Hackathon race · catalog PRs
+source:
+  kind: github.search
+  params: {repo: NousResearch/hermes-agent, type: pr, title_contains: plugin-catalog, window: 24h, baseline_days: 14}
+every: 10m
+display:
+  - type: score
+    label: Change vs usual
+    components:
+      - {metric: recent, weight: 100, type: delta, baseline: source, sensitivity: 1.0, direction: both}
+  - {type: stat, value: recent, label: New catalog PRs in 24h, show: both}
+  - {type: spark, value: recent, label: Trend, points: 24}
+alert: {ring_at_least: 70, notify: toast}
+icon: source
+link: https://github.com/NousResearch/hermes-agent/pulls

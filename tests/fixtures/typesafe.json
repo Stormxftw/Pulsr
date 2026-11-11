@@ -1,0 +1,122 @@
+{
+  "type": 0,
+  "code": "typesafe",
+  "expires_at": null,
+  "id": "1549573691040342097",
+  "guild": {
+    "id": "1483217544214085663",
+    "name": "TypeSafe AI",
+    "splash": "cd701d66e18a40668e12774513026d3d",
+    "banner": "abf406ba46eecf7fcef7e671f40e769b",
+    "description": "The home of Jev, the first public System One model",
+    "icon": "168d293b72c249e724a46906072eac2f",
+    "features": [
+      "PREVIEW_ENABLED",
+      "MAX_FILE_SIZE_50_MB",
+      "GUILD_ONBOARDING_EVER_ENABLED",
+      "STAGE_CHANNEL_VIEWERS_50",
+      "AGE_VERIFICATION_LARGE_GUILD",
+      "ACTIVITY_FEED_DISABLED_BY_USER",
+      "AUDIO_BITRATE_128_KBPS",
+      "GUILD_SERVER_GUIDE",
+      "COMMUNITY",
+      "BANNER",
+      "ENHANCED_ROLE_COLORS",
+      "STAGE_CHANNEL_VIEWERS_150",
+      "STAGE_CHANNEL_VIEWERS_300",
+      "AUDIO_BITRATE_384_KBPS",
+      "ENABLED_MODERATION_EXPERIENCE_FOR_NON_COMMUNITY",
+      "MAX_FILE_SIZE_100_MB",
+      "MEMBER_VERIFICATION_GATE_ENABLED",
+      "AUTO_MODERATION",
+      "ANIMATED_BANNER",
+      "ROLE_ICONS",
+      "AUDIO_BITRATE_256_KBPS",
+      "INVITE_SPLASH",
+      "VANITY_URL",
+      "ANIMATED_ICON",
+      "SOUNDBOARD",
+      "ENABLED_DISCOVERABLE_BEFORE",
+      "GUILD_WEB_PAGE_VANITY_URL",
+      "VIDEO_QUALITY_1080_60FPS",
+      "VIDEO_QUALITY_720_60FPS",
+      "GUILD_ONBOARDING",
+      "TIERLESS_BOOSTING",
+      "DISCOVERABLE",
+      "VIDEO_BITRATE_ENHANCED",
+      "GUILD_ONBOARDING_HAS_PROMPTS",
+      "NEWS",
+      "GUILD_TAGS"
+    ],
+    "verification_level": 2,
+    "vanity_url_code": "typesafe",
+    "nsfw_level": 0,
+    "nsfw": false,
+    "premium_subscription_count": 33,
+    "premium_tier": 3
+  },
+  "guild_id": "1483217544214085663",
+  "channel": {
+    "id": "1543385881165963398",
+    "type": 0,
+    "name": "rules"
+  },
+  "profile": {
+    "id": "1483217544214085663",
+    "name": "TypeSafe AI",
+    "icon_hash": "168d293b72c249e724a46906072eac2f",
+    "member_count": 113394,
+    "online_count": 19068,
+    "description": "The home of Jev, the first public System One model",
+    "brand_color_primary": "#ff1c90",
+    "banner_hash": null,
+    "game_application_ids": [],
+    "game_activity": {},
+    "tag": "Jev",
+    "badge": 1,
+    "badge_color_primary": "#e551ba",
+    "badge_color_secondary": "#ff7fc0",
+    "badge_hash": "746321babbc38977dea6f131e467bdf4",
+    "traits": [
+      {
+        "emoji_id": null,
+        "emoji_name": null,
+        "emoji_animated": false,
+        "label": "Fast",
+        "position": 0
+      },
+      {
+        "emoji_id": null,
+        "emoji_name": null,
+        "emoji_animated": false,
+        "label": "Cheap",
+        "position": 1
+      },
+      {
+        "emoji_id": null,
+        "emoji_name": null,
+        "emoji_animated": false,
+        "label": "Accurate",
+        "position": 2
+      },
+      {
+        "emoji_id": null,
+        "emoji_name": null,
+        "emoji_animated": false,
+        "label": "Pick 3",
+        "position": 3
+      }
+    ],
+    "features": [
+      "MEMBER_VERIFICATION_GATE_ENABLED",
+      "DISCOVERABLE",
+      "COMMUNITY"
+    ],
+    "visibility": 1,
+    "custom_banner_hash": "f5ce3f8fce929de8c1245aa18fccbbc8",
+    "premium_subscription_count": 33,
+    "premium_tier": 3
+  },
+  "approximate_member_count": 113394,
+  "approximate_presence_count": 19068
+}

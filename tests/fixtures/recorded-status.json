@@ -1,0 +1,440 @@
+{
+  "servers": [
+    {
+      "id": "1019361803752456192",
+      "name": "NVIDIA  Developer",
+      "description": "Official NVIDIA Developer server for developers and users of NVIDIA SDKs, APIs, Libraries and Tools.",
+      "icon_hash": "848d7ef3fced804c00c1ea496884ddb1",
+      "online": 2742,
+      "members": 21862,
+      "features": [
+        "GUILD_WEB_PAGE_VANITY_URL",
+        "NEWS",
+        "COMMUNITY",
+        "ACTIVITY_FEED_DISABLED_BY_USER",
+        "ANIMATED_BANNER",
+        "ANIMATED_ICON",
+        "STAGE_CHANNEL_VIEWERS_50",
+        "SOUNDBOARD",
+        "AUTO_MODERATION",
+        "ENABLED_DISCOVERABLE_BEFORE",
+        "TIERLESS_BOOSTING_SYSTEM_MESSAGE",
+        "TIERLESS_BOOSTING",
+        "DISCOVERABLE",
+        "AUDIO_BITRATE_256_KBPS",
+        "VIDEO_QUALITY_720_60FPS",
+        "PREVIEW_ENABLED",
+        "WELCOME_SCREEN_ENABLED",
+        "MAX_FILE_SIZE_50_MB",
+        "VIDEO_QUALITY_1080_60FPS",
+        "STAGE_CHANNEL_VIEWERS_150",
+        "STAGE_CHANNEL_VIEWERS_300",
+        "VANITY_URL",
+        "MAX_FILE_SIZE_100_MB",
+        "BANNER",
+        "ROLE_ICONS",
+        "AGE_VERIFICATION_LARGE_GUILD",
+        "MEMBER_VERIFICATION_GATE_ENABLED",
+        "VIDEO_BITRATE_ENHANCED",
+        "CHANNEL_ICON_EMOJIS_GENERATED",
+        "CONSIDERED_EXTERNALLY_DISCOVERABLE"
+      ],
+      "boost_tier": 3,
+      "boost_count": 17,
+      "ts": 1794004151.1642482,
+      "voice_channels": null,
+      "code": "nvidiadeveloper",
+      "movement": {
+        "score": 9.8,
+        "warming": false,
+        "online_delta": -79,
+        "member_delta": 0,
+        "baseline_online": 2821,
+        "baseline_samples": 1,
+        "window_seconds": 637.377491235733,
+        "components": {
+          "presence": 9.801488833746896,
+          "members": 0.0,
+          "voice": 0.0
+        }
+      },
+      "widget": null,
+      "widget_state": "unavailable",
+      "note": null,
+      "note_path": "$ARTIFACTS\\pulse-rings\\smoke-data\\notes\\1019361803752456192.md",
+      "stale": false,
+      "error": null,
+      "next_due": 1794004863.4268675,
+      "history": [
+        {
+          "ts": 1794003513.786757,
+          "online": 2821
+        },
+        {
+          "ts": 1794004151.1642482,
+          "online": 2742
+        }
+      ]
+    },
+    {
+      "id": "1483217544214085663",
+      "name": "TypeSafe AI",
+      "description": "The home of Jev, the first public System One model",
+      "icon_hash": "168d293b72c249e724a46906072eac2f",
+      "online": 18905,
+      "members": 113393,
+      "features": [
+        "DISCOVERABLE",
+        "AGE_VERIFICATION_LARGE_GUILD",
+        "ENHANCED_ROLE_COLORS",
+        "GUILD_TAGS",
+        "VIDEO_QUALITY_1080_60FPS",
+        "MAX_FILE_SIZE_50_MB",
+        "VANITY_URL",
+        "AUDIO_BITRATE_384_KBPS",
+        "VIDEO_QUALITY_720_60FPS",
+        "ENABLED_MODERATION_EXPERIENCE_FOR_NON_COMMUNITY",
+        "INVITE_SPLASH",
+        "AUDIO_BITRATE_128_KBPS",
+        "ENABLED_DISCOVERABLE_BEFORE",
+        "GUILD_ONBOARDING_HAS_PROMPTS",
+        "VIDEO_BITRATE_ENHANCED",
+        "BANNER",
+        "GUILD_ONBOARDING",
+        "NEWS",
+        "ACTIVITY_FEED_DISABLED_BY_USER",
+        "GUILD_SERVER_GUIDE",
+        "AUDIO_BITRATE_256_KBPS",
+        "ANIMATED_BANNER",
+        "COMMUNITY",
+        "STAGE_CHANNEL_VIEWERS_150",
+        "STAGE_CHANNEL_VIEWERS_300",
+        "PREVIEW_ENABLED",
+        "ROLE_ICONS",
+        "TIERLESS_BOOSTING",
+        "AUTO_MODERATION",
+        "MEMBER_VERIFICATION_GATE_ENABLED"
+      ],
+      "boost_tier": 3,
+      "boost_count": 33,
+      "ts": 1794004156.1370993,
+      "voice_channels": null,
+      "code": "typesafe",
+      "movement": {
+        "score": 3.0,
+        "warming": false,
+        "online_delta": -163,
+        "member_delta": -1,
+        "baseline_online": 19068,
+        "baseline_samples": 1,
+        "window_seconds": 640.6096563339233,
+        "components": {
+          "presence": 2.991923641703377,
+          "members": 0.017637617510626664,
+          "voice": 0.0
+        }
+      },
+      "widget": null,
+      "widget_state": "unavailable",
+      "note": null,
+      "note_path": "$ARTIFACTS\\pulse-rings\\smoke-data\\notes\\1483217544214085663.md",
+      "stale": false,
+      "error": null,
+      "next_due": 1794004862.4758623,
+      "history": [
+        {
+          "ts": 1794003515.527443,
+          "online": 19068
+        },
+        {
+          "ts": 1794004156.1370993,
+          "online": 18905
+        }
+      ]
+    },
+    {
+      "id": "879548962464493619",
+      "name": "Hugging Face",
+      "description": "We're working to democratize good machine learning \ud83e\udd17Verify to link your Hub and Discord accounts!",
+      "icon_hash": "7d2010cb2097cdbb0b1103ee705c15f6",
+      "online": 15728,
+      "members": 246484,
+      "features": [
+        "NEWS",
+        "AGE_VERIFICATION_LARGE_GUILD",
+        "SOUNDBOARD",
+        "MAX_FILE_SIZE_50_MB",
+        "CHANNEL_ICON_EMOJIS_GENERATED",
+        "AUDIO_BITRATE_256_KBPS",
+        "AUDIO_BITRATE_128_KBPS",
+        "VIDEO_BITRATE_ENHANCED",
+        "DISCOVERABLE",
+        "VIDEO_QUALITY_720_60FPS",
+        "VANITY_URL",
+        "STAGE_CHANNEL_VIEWERS_150",
+        "GUILD_WEB_PAGE_VANITY_URL",
+        "SUMMARIES_ENABLED_GA",
+        "GUILD_ONBOARDING_EVER_ENABLED",
+        "STAGE_CHANNEL_VIEWERS_300",
+        "INVITE_SPLASH",
+        "ROLE_ICONS",
+        "COMMUNITY_EXP_LARGE_GATED",
+        "CONSIDERED_EXTERNALLY_DISCOVERABLE",
+        "COMMUNITY",
+        "ANIMATED_BANNER",
+        "STAGE_CHANNEL_VIEWERS_50",
+        "SUMMARIES_ENABLED_BY_USER",
+        "BANNER",
+        "TIERLESS_BOOSTING",
+        "WELCOME_SCREEN_ENABLED",
+        "PREVIEW_ENABLED",
+        "ANIMATED_ICON",
+        "MAX_FILE_SIZE_100_MB"
+      ],
+      "boost_tier": 3,
+      "boost_count": 14,
+      "ts": 1794004161.3414931,
+      "voice_channels": 0,
+      "code": "6EbMcWJHdb",
+      "movement": {
+        "score": 2.5,
+        "warming": false,
+        "online_delta": -113,
+        "member_delta": 1,
+        "baseline_online": 15841,
+        "baseline_samples": 1,
+        "window_seconds": 644.0022292137146,
+        "components": {
+          "presence": 2.496685815289439,
+          "members": 0.008114149860233769,
+          "voice": 0.0
+        }
+      },
+      "widget": {
+        "ts": 1794004163.8808324,
+        "presence_count": 15735,
+        "voice_channels": 0,
+        "channels": []
+      },
+      "widget_state": "available",
+      "note": null,
+      "note_path": "$ARTIFACTS\\pulse-rings\\smoke-data\\notes\\879548962464493619.md",
+      "stale": false,
+      "error": null,
+      "next_due": 1794004870.4312022,
+      "history": [
+        {
+          "ts": 1794003517.339264,
+          "online": 15841
+        },
+        {
+          "ts": 1794004161.3414931,
+          "online": 15728
+        }
+      ]
+    },
+    {
+      "id": "1053877538025386074",
+      "name": "Nous Research",
+      "description": "We're a like-minded community interested in open-source AI. Join us and connect with fellow enthusiasts & experts alike!",
+      "icon_hash": "f3d57c7324c90aa495820fba4ca98487",
+      "online": 17399,
+      "members": 149454,
+      "features": [
+        "NEWS",
+        "AGE_VERIFICATION_LARGE_GUILD",
+        "SOUNDBOARD",
+        "MAX_FILE_SIZE_50_MB",
+        "CHANNEL_ICON_EMOJIS_GENERATED",
+        "AUDIO_BITRATE_256_KBPS",
+        "AUDIO_BITRATE_128_KBPS",
+        "VIDEO_BITRATE_ENHANCED",
+        "DISCOVERABLE",
+        "VIDEO_QUALITY_720_60FPS",
+        "GUILD_ONBOARDING",
+        "VANITY_URL",
+        "GUILD_ONBOARDING_HAS_PROMPTS",
+        "GUILD_TAGS",
+        "STAGE_CHANNEL_VIEWERS_150",
+        "GUILD_WEB_PAGE_VANITY_URL",
+        "MEMBER_VERIFICATION_GATE_ENABLED",
+        "GUILD_ONBOARDING_EVER_ENABLED",
+        "INVITE_SPLASH",
+        "STAGE_CHANNEL_VIEWERS_300",
+        "ROLE_ICONS",
+        "COMMUNITY",
+        "ANIMATED_BANNER",
+        "GUILD_TAGS_BADGE_PACK_FLEX",
+        "STAGE_CHANNEL_VIEWERS_50",
+        "ENHANCED_ROLE_COLORS",
+        "BANNER",
+        "TIERLESS_BOOSTING",
+        "PREVIEW_ENABLED",
+        "ANIMATED_ICON"
+      ],
+      "boost_tier": 3,
+      "boost_count": 77,
+      "ts": 1794004146.067297,
+      "voice_channels": null,
+      "code": "nousresearch",
+      "movement": {
+        "score": 2.0,
+        "warming": false,
+        "online_delta": -99,
+        "member_delta": -1,
+        "baseline_online": 17498,
+        "baseline_samples": 1,
+        "window_seconds": 634.1207299232483,
+        "components": {
+          "presence": 1.980226311578466,
+          "members": 0.01338195443444515,
+          "voice": 0.0
+        }
+      },
+      "widget": null,
+      "widget_state": "unavailable",
+      "note": null,
+      "note_path": "$ARTIFACTS\\pulse-rings\\smoke-data\\notes\\1053877538025386074.md",
+      "stale": false,
+      "error": null,
+      "next_due": 1794004760.5073247,
+      "history": [
+        {
+          "ts": 1794003511.946567,
+          "online": 17498
+        },
+        {
+          "ts": 1794004146.067297,
+          "online": 17399
+        }
+      ]
+    },
+    {
+      "id": "1128867683291627614",
+      "name": "Ollama",
+      "description": "Ollama is the most popular way to build with open models. Join the community discussion!",
+      "icon_hash": "328557efe4e1ac0b6915f395803d31fd",
+      "online": 15521,
+      "members": 194127,
+      "features": [
+        "VANITY_URL",
+        "STAGE_CHANNEL_VIEWERS_50",
+        "AUTO_MODERATION",
+        "MAX_FILE_SIZE_100_MB",
+        "INVITE_SPLASH",
+        "GUILD_ONBOARDING",
+        "STAGE_CHANNEL_VIEWERS_150",
+        "SOUNDBOARD",
+        "STAGE_CHANNEL_VIEWERS_300",
+        "GUILD_ONBOARDING_EVER_ENABLED",
+        "ANIMATED_ICON",
+        "TIERLESS_BOOSTING",
+        "CONSIDERED_EXTERNALLY_DISCOVERABLE",
+        "AUDIO_BITRATE_384_KBPS",
+        "AUDIO_BITRATE_256_KBPS",
+        "AGE_VERIFICATION_LARGE_GUILD",
+        "COMMUNITY",
+        "TIERLESS_BOOSTING_SYSTEM_MESSAGE",
+        "VIDEO_QUALITY_720_60FPS",
+        "BANNER",
+        "NEWS",
+        "VIDEO_QUALITY_1080_60FPS",
+        "CHANNEL_ICON_EMOJIS_GENERATED",
+        "ENHANCED_ROLE_COLORS",
+        "GUILD_TAGS",
+        "AUDIO_BITRATE_128_KBPS",
+        "ANIMATED_BANNER",
+        "ROLE_ICONS",
+        "GUESTS_ENABLED",
+        "VIDEO_BITRATE_ENHANCED"
+      ],
+      "boost_tier": 3,
+      "boost_count": 39,
+      "ts": 1794004166.4418933,
+      "voice_channels": 0,
+      "code": "ollama",
+      "movement": {
+        "score": 1.0,
+        "warming": false,
+        "online_delta": -41,
+        "member_delta": -6,
+        "baseline_online": 15562,
+        "baseline_samples": 1,
+        "window_seconds": 647.1114122867584,
+        "components": {
+          "presence": 0.9221179796941267,
+          "members": 0.0618132929486486,
+          "voice": 0.0
+        }
+      },
+      "widget": {
+        "ts": 1794004168.9684231,
+        "presence_count": 15518,
+        "voice_channels": 0,
+        "channels": []
+      },
+      "widget_state": "available",
+      "note": null,
+      "note_path": "$ARTIFACTS\\pulse-rings\\smoke-data\\notes\\1128867683291627614.md",
+      "stale": false,
+      "error": null,
+      "next_due": 1794004785.5700076,
+      "history": [
+        {
+          "ts": 1794003519.330481,
+          "online": 15562
+        },
+        {
+          "ts": 1794004166.4418933,
+          "online": 15521
+        }
+      ]
+    }
+  ],
+  "curated": [
+    {
+      "code": "nousresearch",
+      "name": "Nous Research",
+      "guild_id": "1053877538025386074",
+      "verified_at": "2026-11-06T22:18:31.946567+00:00",
+      "members": 149455,
+      "online": 17498
+    },
+    {
+      "code": "nvidiadeveloper",
+      "name": "NVIDIA  Developer",
+      "guild_id": "1019361803752456192",
+      "verified_at": "2026-11-06T22:18:33.786757+00:00",
+      "members": 21862,
+      "online": 2821
+    },
+    {
+      "code": "typesafe",
+      "name": "TypeSafe AI",
+      "guild_id": "1483217544214085663",
+      "verified_at": "2026-11-06T22:18:35.527443+00:00",
+      "members": 113394,
+      "online": 19068
+    },
+    {
+      "code": "6EbMcWJHdb",
+      "name": "Hugging Face",
+      "guild_id": "879548962464493619",
+      "verified_at": "2026-11-06T22:18:37.339264+00:00",
+      "members": 246483,
+      "online": 15841
+    },
+    {
+      "code": "ollama",
+      "name": "Ollama",
+      "guild_id": "1128867683291627614",
+      "verified_at": "2026-11-06T22:18:39.330481+00:00",
+      "members": 194133,
+      "online": 15562
+    }
+  ],
+  "as_of": 1794004171.665401,
+  "poll_seconds": 600,
+  "data_dir": "$ARTIFACTS\\pulse-rings\\smoke-data",
+  "source": "Public invite counts; optional public widget. No messages are read."
+}

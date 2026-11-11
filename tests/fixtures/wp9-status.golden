@@ -1,0 +1,3476 @@
+[
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "discord.invite",
+        "params": {
+          "invite": "nousresearch",
+          "voice": false
+        }
+      },
+      "icon": "initials",
+      "every": "10m",
+      "ring": {
+        "components": [
+          {
+            "metric": "online",
+            "weight": 70,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 25,
+            "sensitivity": 0.2,
+            "direction": "both"
+          },
+          {
+            "metric": "members",
+            "weight": 20,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 100,
+            "sensitivity": 0.01,
+            "direction": "both"
+          },
+          {
+            "metric": "voice_channels",
+            "weight": 10,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "online",
+        "label": "{value} online",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net {delta} members \u00b7 {window}",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "{value} active voice channels",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://discord.gg/nousresearch"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "discord.invite",
+      "state": "active",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "online",
+            "value": 42,
+            "baseline": 42,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "members",
+            "value": 100,
+            "baseline": 100,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "voice_channels",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": "Public widget unavailable or stale"
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "42 online",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net 0 members \u00b7 33 min",
+          "hide_when_zero": false,
+          "value": 100,
+          "delta": 0,
+          "unknown": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "Voice channels unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 42
+        },
+        {
+          "ts": 9000,
+          "value": 42
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "cdn.discordapp.com",
+          "discord.com"
+        ],
+        "req_per_hour": 6.0,
+        "req_per_hour_display": 6
+      },
+      "link": "https://discord.gg/nousresearch",
+      "icon": "initials",
+      "every": "10m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "discord.invite",
+        "params": {
+          "invite": "nousresearch",
+          "voice": false
+        }
+      },
+      "icon": "initials",
+      "every": "10m",
+      "ring": {
+        "components": [
+          {
+            "metric": "online",
+            "weight": 70,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 25,
+            "sensitivity": 0.2,
+            "direction": "both"
+          },
+          {
+            "metric": "members",
+            "weight": 20,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 100,
+            "sensitivity": 0.01,
+            "direction": "both"
+          },
+          {
+            "metric": "voice_channels",
+            "weight": 10,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "online",
+        "label": "{value} online",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net {delta} members \u00b7 {window}",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "{value} active voice channels",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://discord.gg/nousresearch"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": "Unavailable"
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "discord.invite",
+      "state": "error",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "online",
+            "value": 42,
+            "baseline": 42,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "members",
+            "value": 100,
+            "baseline": 100,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "voice_channels",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": "Public widget unavailable or stale"
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "42 online",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net 0 members \u00b7 33 min",
+          "hide_when_zero": false,
+          "value": 100,
+          "delta": 0,
+          "unknown": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "Voice channels unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": "Unavailable",
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 42
+        },
+        {
+          "ts": 9000,
+          "value": 42
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "cdn.discordapp.com",
+          "discord.com"
+        ],
+        "req_per_hour": 6.0,
+        "req_per_hour_display": 6
+      },
+      "link": "https://discord.gg/nousresearch",
+      "icon": "initials",
+      "every": "10m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "discord.invite",
+        "params": {
+          "invite": "nousresearch",
+          "voice": false
+        }
+      },
+      "icon": "initials",
+      "every": "10m",
+      "ring": {
+        "components": [
+          {
+            "metric": "online",
+            "weight": 70,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 25,
+            "sensitivity": 0.2,
+            "direction": "both"
+          },
+          {
+            "metric": "members",
+            "weight": 20,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 100,
+            "sensitivity": 0.01,
+            "direction": "both"
+          },
+          {
+            "metric": "voice_channels",
+            "weight": 10,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "online",
+        "label": "{value} online",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net {delta} members \u00b7 {window}",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "{value} active voice channels",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://discord.gg/nousresearch"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 1,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "discord.invite",
+      "state": "paused",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "online",
+            "value": 42,
+            "baseline": 42,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "members",
+            "value": 100,
+            "baseline": 100,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "voice_channels",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": "Public widget unavailable or stale"
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "42 online",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net 0 members \u00b7 33 min",
+          "hide_when_zero": false,
+          "value": 100,
+          "delta": 0,
+          "unknown": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "Voice channels unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 42
+        },
+        {
+          "ts": 9000,
+          "value": 42
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "cdn.discordapp.com",
+          "discord.com"
+        ],
+        "req_per_hour": 6.0,
+        "req_per_hour_display": 6
+      },
+      "link": "https://discord.gg/nousresearch",
+      "icon": "initials",
+      "every": "10m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "discord.invite",
+        "params": {
+          "invite": "nousresearch",
+          "voice": false
+        }
+      },
+      "icon": "initials",
+      "every": "10m",
+      "ring": {
+        "components": [
+          {
+            "metric": "online",
+            "weight": 70,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 25,
+            "sensitivity": 0.2,
+            "direction": "both"
+          },
+          {
+            "metric": "members",
+            "weight": 20,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 100,
+            "sensitivity": 0.01,
+            "direction": "both"
+          },
+          {
+            "metric": "voice_channels",
+            "weight": 10,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "online",
+        "label": "{value} online",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net {delta} members \u00b7 {window}",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "{value} active voice channels",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://discord.gg/nousresearch"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 1,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "discord.invite",
+      "state": "stale",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "online",
+            "value": 42,
+            "baseline": 42,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "members",
+            "value": 100,
+            "baseline": 100,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          },
+          {
+            "metric": "voice_channels",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": "Public widget unavailable or stale"
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "42 online",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net 0 members \u00b7 33 min",
+          "hide_when_zero": false,
+          "value": 100,
+          "delta": 0,
+          "unknown": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "Voice channels unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 1.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 42
+        },
+        {
+          "ts": 9000,
+          "value": 42
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "cdn.discordapp.com",
+          "discord.com"
+        ],
+        "req_per_hour": 6.0,
+        "req_per_hour_display": 6
+      },
+      "link": "https://discord.gg/nousresearch",
+      "icon": "initials",
+      "every": "10m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "discord.invite",
+        "params": {
+          "invite": "nousresearch",
+          "voice": false
+        }
+      },
+      "icon": "initials",
+      "every": "10m",
+      "ring": {
+        "components": [
+          {
+            "metric": "online",
+            "weight": 70,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 25,
+            "sensitivity": 0.2,
+            "direction": "both"
+          },
+          {
+            "metric": "members",
+            "weight": 20,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 100,
+            "sensitivity": 0.01,
+            "direction": "both"
+          },
+          {
+            "metric": "voice_channels",
+            "weight": 10,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "online",
+        "label": "{value} online",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Net {delta} members \u00b7 {window}",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "voice_channels",
+          "label": "{value} active voice channels",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://discord.gg/nousresearch"
+    },
+    "now": 10000,
+    "samples": [],
+    "updates": {
+      "last_ok_ts": null,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "discord.invite",
+      "state": "warming",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "online",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "members",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "oldest",
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "voice_channels",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": "Public widget unavailable or stale"
+          }
+        ],
+        "baseline_samples": 0,
+        "window_seconds": 0
+      },
+      "capsule": {
+        "label": "Online unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "members",
+          "show": "delta",
+          "label": "Members unknown",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "voice_channels",
+          "label": "Voice channels unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": null,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [],
+      "budget": {
+        "hosts": [
+          "cdn.discordapp.com",
+          "discord.com"
+        ],
+        "req_per_hour": 6.0,
+        "req_per_hour_display": 6
+      },
+      "link": "https://discord.gg/nousresearch",
+      "icon": "initials",
+      "every": "10m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "github.repo",
+        "params": {
+          "repo": "NousResearch/hermes-agent"
+        }
+      },
+      "icon": "initials",
+      "every": "15m",
+      "ring": {
+        "components": [
+          {
+            "metric": "stars",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "stars",
+        "label": "{value} stars",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "{value} forks",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "{value} open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "{value} open PRs",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://github.com/NousResearch/hermes-agent"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "github.repo",
+      "state": "active",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "stars",
+            "value": 12,
+            "baseline": 12,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "12 stars",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "3 forks",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 3,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "2 open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 2,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "Open prs unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 12
+        },
+        {
+          "ts": 9000,
+          "value": 12
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 8.0,
+        "req_per_hour_display": 8
+      },
+      "link": "https://github.com/NousResearch/hermes-agent",
+      "icon": "initials",
+      "every": "15m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "github.repo",
+        "params": {
+          "repo": "NousResearch/hermes-agent"
+        }
+      },
+      "icon": "initials",
+      "every": "15m",
+      "ring": {
+        "components": [
+          {
+            "metric": "stars",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "stars",
+        "label": "{value} stars",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "{value} forks",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "{value} open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "{value} open PRs",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://github.com/NousResearch/hermes-agent"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": "Unavailable"
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "github.repo",
+      "state": "error",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "stars",
+            "value": 12,
+            "baseline": 12,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "12 stars",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "3 forks",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 3,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "2 open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 2,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "Open prs unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": "Unavailable",
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 12
+        },
+        {
+          "ts": 9000,
+          "value": 12
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 8.0,
+        "req_per_hour_display": 8
+      },
+      "link": "https://github.com/NousResearch/hermes-agent",
+      "icon": "initials",
+      "every": "15m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "github.repo",
+        "params": {
+          "repo": "NousResearch/hermes-agent"
+        }
+      },
+      "icon": "initials",
+      "every": "15m",
+      "ring": {
+        "components": [
+          {
+            "metric": "stars",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "stars",
+        "label": "{value} stars",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "{value} forks",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "{value} open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "{value} open PRs",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://github.com/NousResearch/hermes-agent"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 1,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "github.repo",
+      "state": "paused",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "stars",
+            "value": 12,
+            "baseline": 12,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "12 stars",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "3 forks",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 3,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "2 open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 2,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "Open prs unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 12
+        },
+        {
+          "ts": 9000,
+          "value": 12
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 8.0,
+        "req_per_hour_display": 8
+      },
+      "link": "https://github.com/NousResearch/hermes-agent",
+      "icon": "initials",
+      "every": "15m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "github.repo",
+        "params": {
+          "repo": "NousResearch/hermes-agent"
+        }
+      },
+      "icon": "initials",
+      "every": "15m",
+      "ring": {
+        "components": [
+          {
+            "metric": "stars",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "stars",
+        "label": "{value} stars",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "{value} forks",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "{value} open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "{value} open PRs",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://github.com/NousResearch/hermes-agent"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 1,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "github.repo",
+      "state": "stale",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "stars",
+            "value": 12,
+            "baseline": 12,
+            "baseline_mode": "oldest",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "12 stars",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "3 forks",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 3,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "2 open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": 2,
+          "delta": null,
+          "unknown": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "Open prs unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 1.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 12
+        },
+        {
+          "ts": 9000,
+          "value": 12
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 8.0,
+        "req_per_hour_display": 8
+      },
+      "link": "https://github.com/NousResearch/hermes-agent",
+      "icon": "initials",
+      "every": "15m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "github.repo",
+        "params": {
+          "repo": "NousResearch/hermes-agent"
+        }
+      },
+      "icon": "initials",
+      "every": "15m",
+      "ring": {
+        "components": [
+          {
+            "metric": "stars",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "oldest",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "stars",
+        "label": "{value} stars",
+        "fill": "baseline"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "{value} forks",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_issues",
+          "label": "{value} open issues (incl. PRs)",
+          "show": "value",
+          "hide_when_zero": false
+        },
+        {
+          "metric": "open_prs",
+          "label": "{value} open PRs",
+          "show": "value",
+          "hide_when_zero": false
+        }
+      ],
+      "link": "https://github.com/NousResearch/hermes-agent"
+    },
+    "now": 10000,
+    "samples": [],
+    "updates": {
+      "last_ok_ts": null,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "github.repo",
+      "state": "warming",
+      "ring": {
+        "score": 0.0,
+        "warming": true,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "stars",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "oldest",
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 0,
+        "window_seconds": 0
+      },
+      "capsule": {
+        "label": "Stars unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "forks",
+          "label": "Forks unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "open_issues",
+          "label": "Open issues unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "open_prs",
+          "label": "Open prs unknown",
+          "show": "value",
+          "hide_when_zero": false,
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": null,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [],
+      "budget": {
+        "hosts": [
+          "api.github.com"
+        ],
+        "req_per_hour": 8.0,
+        "req_per_hour_display": 8
+      },
+      "link": "https://github.com/NousResearch/hermes-agent",
+      "icon": "initials",
+      "every": "15m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "hermes.activity",
+        "params": {
+          "scope": "profile"
+        }
+      },
+      "icon": "initials",
+      "every": "30s",
+      "ring": {
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "weight": 80,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 5,
+            "sensitivity": 1.0,
+            "direction": "both"
+          },
+          {
+            "metric": "tool_errors_1h",
+            "weight": 20,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "turns_running",
+        "label": "{value} turns running",
+        "fill": {
+          "full_at": 4
+        }
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "{value} waiting on you",
+          "hide_when_zero": true,
+          "show": "value"
+        },
+        {
+          "metric": "subagents_running",
+          "label": "{value} subagents",
+          "hide_when_zero": true,
+          "show": "value"
+        }
+      ]
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "hermes.activity",
+      "state": "stale",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "tool_errors_1h",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "Turns running unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "Waiting on you unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "subagents_running",
+          "label": "Subagents running unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": null
+        },
+        {
+          "ts": 9000,
+          "value": null
+        }
+      ],
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 0.0,
+        "req_per_hour_display": 0
+      },
+      "link": null,
+      "icon": "initials",
+      "every": "30s",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "hermes.activity",
+        "params": {
+          "scope": "profile"
+        }
+      },
+      "icon": "initials",
+      "every": "30s",
+      "ring": {
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "weight": 80,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 5,
+            "sensitivity": 1.0,
+            "direction": "both"
+          },
+          {
+            "metric": "tool_errors_1h",
+            "weight": 20,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "turns_running",
+        "label": "{value} turns running",
+        "fill": {
+          "full_at": 4
+        }
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "{value} waiting on you",
+          "hide_when_zero": true,
+          "show": "value"
+        },
+        {
+          "metric": "subagents_running",
+          "label": "{value} subagents",
+          "hide_when_zero": true,
+          "show": "value"
+        }
+      ]
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": "Unavailable"
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "hermes.activity",
+      "state": "error",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "tool_errors_1h",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "Turns running unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "Waiting on you unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "subagents_running",
+          "label": "Subagents running unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": "Unavailable",
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": null
+        },
+        {
+          "ts": 9000,
+          "value": null
+        }
+      ],
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 0.0,
+        "req_per_hour_display": 0
+      },
+      "link": null,
+      "icon": "initials",
+      "every": "30s",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "hermes.activity",
+        "params": {
+          "scope": "profile"
+        }
+      },
+      "icon": "initials",
+      "every": "30s",
+      "ring": {
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "weight": 80,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 5,
+            "sensitivity": 1.0,
+            "direction": "both"
+          },
+          {
+            "metric": "tool_errors_1h",
+            "weight": 20,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "turns_running",
+        "label": "{value} turns running",
+        "fill": {
+          "full_at": 4
+        }
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "{value} waiting on you",
+          "hide_when_zero": true,
+          "show": "value"
+        },
+        {
+          "metric": "subagents_running",
+          "label": "{value} subagents",
+          "hide_when_zero": true,
+          "show": "value"
+        }
+      ]
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 1,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "hermes.activity",
+      "state": "paused",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "tool_errors_1h",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "Turns running unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "Waiting on you unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "subagents_running",
+          "label": "Subagents running unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": null
+        },
+        {
+          "ts": 9000,
+          "value": null
+        }
+      ],
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 0.0,
+        "req_per_hour_display": 0
+      },
+      "link": null,
+      "icon": "initials",
+      "every": "30s",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "hermes.activity",
+        "params": {
+          "scope": "profile"
+        }
+      },
+      "icon": "initials",
+      "every": "30s",
+      "ring": {
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "weight": 80,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 5,
+            "sensitivity": 1.0,
+            "direction": "both"
+          },
+          {
+            "metric": "tool_errors_1h",
+            "weight": 20,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "turns_running",
+        "label": "{value} turns running",
+        "fill": {
+          "full_at": 4
+        }
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "{value} waiting on you",
+          "hide_when_zero": true,
+          "show": "value"
+        },
+        {
+          "metric": "subagents_running",
+          "label": "{value} subagents",
+          "hide_when_zero": true,
+          "show": "value"
+        }
+      ]
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 1,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "hermes.activity",
+      "state": "stale",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "tool_errors_1h",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 2000,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "Turns running unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "Waiting on you unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "subagents_running",
+          "label": "Subagents running unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 1.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": null
+        },
+        {
+          "ts": 9000,
+          "value": null
+        }
+      ],
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 0.0,
+        "req_per_hour_display": 0
+      },
+      "link": null,
+      "icon": "initials",
+      "every": "30s",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "hermes.activity",
+        "params": {
+          "scope": "profile"
+        }
+      },
+      "icon": "initials",
+      "every": "30s",
+      "ring": {
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "weight": 80,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 5,
+            "sensitivity": 1.0,
+            "direction": "both"
+          },
+          {
+            "metric": "tool_errors_1h",
+            "weight": 20,
+            "type": "level",
+            "full_at": 5
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "turns_running",
+        "label": "{value} turns running",
+        "fill": {
+          "full_at": 4
+        }
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "{value} waiting on you",
+          "hide_when_zero": true,
+          "show": "value"
+        },
+        {
+          "metric": "subagents_running",
+          "label": "{value} subagents",
+          "hide_when_zero": true,
+          "show": "value"
+        }
+      ]
+    },
+    "now": 10000,
+    "samples": [],
+    "updates": {
+      "last_ok_ts": null,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "hermes.activity",
+      "state": "warming",
+      "ring": {
+        "score": 0.0,
+        "warming": false,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "tool_calls_10m",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          },
+          {
+            "metric": "tool_errors_1h",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": null,
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 0,
+        "window_seconds": 0
+      },
+      "capsule": {
+        "label": "Turns running unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [
+        {
+          "metric": "waiting_on_you",
+          "label": "Waiting on you unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        },
+        {
+          "metric": "subagents_running",
+          "label": "Subagents running unknown",
+          "hide_when_zero": true,
+          "show": "value",
+          "value": null,
+          "delta": null,
+          "unknown": true
+        }
+      ],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": null,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [],
+      "budget": {
+        "hosts": [],
+        "req_per_hour": 0.0,
+        "req_per_hour_display": 0
+      },
+      "link": null,
+      "icon": "initials",
+      "every": "30s",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "http_json",
+        "params": {
+          "url": "https://example.org/count",
+          "metrics": {
+            "count": "/count"
+          }
+        }
+      },
+      "icon": "initials",
+      "every": "5m",
+      "ring": {
+        "components": [
+          {
+            "metric": "count",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "count",
+        "label": "{value}",
+        "fill": "baseline"
+      },
+      "lines": [],
+      "link": "https://example.org/count"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "http_json",
+      "state": "stale",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "count",
+            "value": 17,
+            "baseline": 17,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "17",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 17
+        },
+        {
+          "ts": 9000,
+          "value": 17
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "example.org"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      },
+      "link": "https://example.org/count",
+      "icon": "initials",
+      "every": "5m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "http_json",
+        "params": {
+          "url": "https://example.org/count",
+          "metrics": {
+            "count": "/count"
+          }
+        }
+      },
+      "icon": "initials",
+      "every": "5m",
+      "ring": {
+        "components": [
+          {
+            "metric": "count",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "count",
+        "label": "{value}",
+        "fill": "baseline"
+      },
+      "lines": [],
+      "link": "https://example.org/count"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 0,
+      "error": "Unavailable"
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "http_json",
+      "state": "error",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "count",
+            "value": 17,
+            "baseline": 17,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "17",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": "Unavailable",
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 17
+        },
+        {
+          "ts": 9000,
+          "value": 17
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "example.org"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      },
+      "link": "https://example.org/count",
+      "icon": "initials",
+      "every": "5m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "http_json",
+        "params": {
+          "url": "https://example.org/count",
+          "metrics": {
+            "count": "/count"
+          }
+        }
+      },
+      "icon": "initials",
+      "every": "5m",
+      "ring": {
+        "components": [
+          {
+            "metric": "count",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "count",
+        "label": "{value}",
+        "fill": "baseline"
+      },
+      "lines": [],
+      "link": "https://example.org/count"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 9000,
+      "next_due": 12000,
+      "paused": 1,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "http_json",
+      "state": "paused",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "count",
+            "value": 17,
+            "baseline": 17,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "17",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 9000.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 17
+        },
+        {
+          "ts": 9000,
+          "value": 17
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "example.org"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      },
+      "link": "https://example.org/count",
+      "icon": "initials",
+      "every": "5m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "http_json",
+        "params": {
+          "url": "https://example.org/count",
+          "metrics": {
+            "count": "/count"
+          }
+        }
+      },
+      "icon": "initials",
+      "every": "5m",
+      "ring": {
+        "components": [
+          {
+            "metric": "count",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "count",
+        "label": "{value}",
+        "fill": "baseline"
+      },
+      "lines": [],
+      "link": "https://example.org/count"
+    },
+    "now": 10000,
+    "samples": [
+      {
+        "ts": 7000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      },
+      {
+        "ts": 9000,
+        "metrics": {
+          "online": 42,
+          "members": 100,
+          "stars": 12,
+          "forks": 3,
+          "open_issues": 2,
+          "count": 17,
+          "active_turns": 2
+        }
+      }
+    ],
+    "updates": {
+      "last_ok_ts": 1,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "http_json",
+      "state": "stale",
+      "ring": {
+        "score": 0,
+        "warming": false,
+        "unknown": false,
+        "components": [
+          {
+            "metric": "count",
+            "value": 17,
+            "baseline": 17,
+            "baseline_mode": "median",
+            "observed_seconds": 2000,
+            "unknown": false,
+            "contribution": 0,
+            "delta": 0,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 1,
+        "window_seconds": 2000
+      },
+      "capsule": {
+        "label": "17",
+        "fill": 50.0,
+        "caption": "100% of usual"
+      },
+      "lines": [],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": 1.0,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [
+        {
+          "ts": 7000,
+          "value": 17
+        },
+        {
+          "ts": 9000,
+          "value": 17
+        }
+      ],
+      "budget": {
+        "hosts": [
+          "example.org"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      },
+      "link": "https://example.org/count",
+      "icon": "initials",
+      "every": "5m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  },
+  {
+    "definition": {
+      "pulse": 1,
+      "id": "golden",
+      "title": "Golden",
+      "source": {
+        "kind": "http_json",
+        "params": {
+          "url": "https://example.org/count",
+          "metrics": {
+            "count": "/count"
+          }
+        }
+      },
+      "icon": "initials",
+      "every": "5m",
+      "ring": {
+        "components": [
+          {
+            "metric": "count",
+            "weight": 100,
+            "type": "delta",
+            "baseline": "median",
+            "window": "24h",
+            "floor": 1,
+            "sensitivity": 1.0,
+            "direction": "both"
+          }
+        ]
+      },
+      "capsule": {
+        "metric": "count",
+        "label": "{value}",
+        "fill": "baseline"
+      },
+      "lines": [],
+      "link": "https://example.org/count"
+    },
+    "now": 10000,
+    "samples": [],
+    "updates": {
+      "last_ok_ts": null,
+      "next_due": 12000,
+      "paused": 0,
+      "error": null
+    },
+    "expected": {
+      "id": "golden",
+      "title": "Golden",
+      "kind": "http_json",
+      "state": "warming",
+      "ring": {
+        "score": 0.0,
+        "warming": true,
+        "unknown": true,
+        "components": [
+          {
+            "metric": "count",
+            "value": null,
+            "baseline": null,
+            "baseline_mode": "median",
+            "observed_seconds": 0,
+            "unknown": true,
+            "contribution": 0.0,
+            "delta": null,
+            "reason": null
+          }
+        ],
+        "baseline_samples": 0,
+        "window_seconds": 0
+      },
+      "capsule": {
+        "label": "Count unknown",
+        "fill": null,
+        "caption": "Not measured"
+      },
+      "lines": [],
+      "icon_data": null,
+      "icon_url": null,
+      "icon_resolved": {
+        "kind": "initials",
+        "text": "G"
+      },
+      "last_ok_ts": null,
+      "next_due": 12000.0,
+      "backoff_until": 0.0,
+      "error": null,
+      "alert": {
+        "active": false,
+        "reason": null,
+        "notify": "none"
+      },
+      "history": [],
+      "budget": {
+        "hosts": [
+          "example.org"
+        ],
+        "req_per_hour": 12.0,
+        "req_per_hour_display": 12
+      },
+      "link": "https://example.org/count",
+      "icon": "initials",
+      "every": "5m",
+      "note": null,
+      "note_path": "<notes>"
+    }
+  }
+]

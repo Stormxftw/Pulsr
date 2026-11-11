@@ -1,0 +1,11 @@
+[project]
+name = "pulse-rings"
+version = "0.5.0-dev"
+description = "Human-approved data-only activity pulses for Hermes Desktop"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["integration: real Hermes checkout and local MCP SDK required"]

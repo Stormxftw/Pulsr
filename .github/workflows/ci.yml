@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  offline-contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Isolated offline tests (no optional conformance skips)
+        run: uv run --isolated --no-project --exclude-newer 3d --python 3.11 --with 'pytest>=8,<9' --with 'fastapi>=0.115,<1' --with 'httpx>=0.27,<1' --with 'jsonschema>=4,<5' --with 'ruamel.yaml>=0.18,<0.19' python -m pytest tests -q
+      - name: Pre-submit versions, disclosures, payloads and capabilities
+        run: uv run --isolated --no-project --exclude-newer 3d --python 3.11 --with 'pytest>=8,<9' --with 'ruamel.yaml>=0.18,<0.19' python -m pytest tests/test_presubmit.py -q
+      - name: Renderer syntax
+        run: node --check desktop/plugin.js

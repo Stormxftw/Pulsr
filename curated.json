@@ -1,0 +1,42 @@
+[
+  {
+    "code": "nousresearch",
+    "name": "Nous Research",
+    "guild_id": "1053877538025386074",
+    "verified_at": "2026-11-06T22:18:31.946567+00:00",
+    "members": 149455,
+    "online": 17498
+  },
+  {
+    "code": "nvidiadeveloper",
+    "name": "NVIDIA  Developer",
+    "guild_id": "1019361803752456192",
+    "verified_at": "2026-11-06T22:18:33.786757+00:00",
+    "members": 21862,
+    "online": 2821
+  },
+  {
+    "code": "typesafe",
+    "name": "TypeSafe AI",
+    "guild_id": "1483217544214085663",
+    "verified_at": "2026-11-06T22:18:35.527443+00:00",
+    "members": 113394,
+    "online": 19068
+  },
+  {
+    "code": "6EbMcWJHdb",
+    "name": "Hugging Face",
+    "guild_id": "879548962464493619",
+    "verified_at": "2026-11-06T22:18:37.339264+00:00",
+    "members": 246483,
+    "online": 15841
+  },
+  {
+    "code": "ollama",
+    "name": "Ollama",
+    "guild_id": "1128867683291627614",
+    "verified_at": "2026-11-06T22:18:39.330481+00:00",
+    "members": 194133,
+    "online": 15562
+  }
+]

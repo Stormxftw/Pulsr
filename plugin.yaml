@@ -1,0 +1,53 @@
+name: pulse-rings
+version: "0.5.0-dev"
+description: Human-approved data-only pulses for Discord, GitHub, read-only Hermes MCP tools, public JSON and Hermes activity.
+author: Stormxftw
+license: MIT
+requires_hermes: ">=0.22.7"
+provides_tools:
+  - pulse_rings_status
+  - pulse_rings_catalog
+  - pulse_rings_propose
+  - pulse_rings_layout_check
+provides_hooks:
+  - on_session_start
+  - on_session_finalize
+  - post_llm_call
+  - pre_llm_call
+  - on_session_end
+  - post_tool_call
+  - on_human_input_request
+  - on_human_input_resolved
+  - subagent_start
+  - subagent_stop
+  - api_request_error
+provides_middleware: []
+requires_env: []
+python_dependencies: []
+config_schema:
+  background_collection:
+    type: bool
+    default: false
+    label: Background collection
+    description: Keep approved pulses updating when the pane is closed. Opt-in daemon thread, one due feed per five-second tick; disable to collect only while open. No draft previews in background.
+  show_sessions:
+    type: bool
+    default: false
+    label: Show Hermes sessions
+    description: Local-only ephemeral session pulses. Reads titles and activity from this Hermes; never transcripts or tool arguments/results. No network. Done sessions linger 15 minutes; disabling clears observations.
+  approver_ids:
+    type: list
+    default: []
+    description: Messaging decision grants as platform:user_id; gateway allowlists also apply. Local typed commands and authenticated Desktop clicks need no grant.
+  github_token:
+    type: secret
+    env: PULSE_RINGS_GITHUB_TOKEN
+    required: false
+    description: Optional GitHub token, sent only to api.github.com.
+oauth: []
+# http_json: human-approved public HTTPS GETs, exact host/full URL, port 443;
+# Hermes public safety APIs required, independently DNS-vetted IP-pinned TLS.
+# No standalone fallback, redirects, auth headers, cookies or proxy environment.
+# Optional human-only Discord Pulse import reads the old profile DB read-only,
+# copies history/notes/validated icons, never changes or disables its source.
+# No importer/activation tool. See README Privacy, network and permissions.
