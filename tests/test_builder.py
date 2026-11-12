@@ -1,7 +1,6 @@
 """Builder boundaries are offline except the explicitly consented single call."""
 import importlib.util
 import json
-from contextlib import nullcontext
 from contextvars import copy_context
 from pathlib import Path
 from types import SimpleNamespace
@@ -36,7 +35,6 @@ def setup(tmp_path, monkeypatch):
     ctx = SimpleNamespace(tool_info=lambda name: flags, list_tools=lambda: ['mcp__probe__read_counts'],
                           call_mcp=lambda server, tool, args, *, timeout: calls.append((server, tool, args, timeout)) or {'ok': True, 'result': {'used': 42, 'limit': 500, 'a/b': {'~': [1.5, True, '7', None]}}})
     monkeypatch.setitem(mcp_access._BINDINGS, str(tmp_path.resolve()), (ctx, copy_context(), str(tmp_path)))
-    monkeypatch.setattr(mcp_access, 'unattended_scope', nullcontext)
     monkeypatch.setattr(mcp_access, 'server_granted', lambda server: True, raising=False)
     with TestClient(app) as client:
         yield client, engine, calls, flags, ctx

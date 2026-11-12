@@ -1,5 +1,4 @@
 """Boundary and control cases for Fable findings #69, #71 and #72. Offline only."""
-import contextlib
 from contextvars import copy_context
 import io
 import json
@@ -296,7 +295,6 @@ def waiting_mcp(tmp_path, monkeypatch):
     engine = Engine(tmp_path, clock=lambda: clock[0], jitter=lambda: 0)
     monkeypatch.setitem(mcp_access._BINDINGS, str(tmp_path.resolve()), (ctx, copy_context(), str(tmp_path)))
     monkeypatch.setattr(mcp_access, 'server_granted', lambda server: granted[0])
-    monkeypatch.setattr(mcp_access, 'unattended_scope', contextlib.nullcontext)
     engine.activate(normalize({'pulse': 1, 'title': 'MCP state', 'icon': 'initials', 'source': {'kind': 'mcp.tool',
         'params': {'server': 'probe', 'tool': 'read_metrics', 'args': {}, 'metrics': {'count': '/count'}}}}))
     engine.poll_one_due(previews=False)

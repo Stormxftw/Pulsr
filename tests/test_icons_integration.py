@@ -5,8 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 import importlib.util
 import json
 from pathlib import Path
-import sys
-from types import ModuleType, SimpleNamespace as NS
+from types import SimpleNamespace as NS
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -113,27 +112,34 @@ def test_failure_gate_dedupes_simultaneous_readers(tmp_path):
     assert len(calls) == 1
 
 
-def test_mcp_private_metadata_is_profile_bound_and_never_dispatched(tmp_path, monkeypatch):
+def test_mcp_icons_come_from_public_tool_info_only(tmp_path):
     scope = ContextVar('icon-test-profile', default='wrong')
     scope.set('correct')
     captured = copy_context()
     scope.set('wrong')
-    task = NS(_tools=[NS(name='counts', icons=[NS(src=DATA, mimeType='image/png')])],
-              initialize_result=NS(serverInfo=NS(icons=[NS(src='https://server.example.org/logo')])))
-    tools = ModuleType('tools')
-    mcp = ModuleType('tools.mcp_tool')
-    mcp._servers = {'correct:probe': task}
-    tools.mcp_tool = mcp
-    resolver = ModuleType('tools.mcp_tool_scope')
-    resolver._resolve_server_key = lambda server: scope.get() + ':' + server
-    monkeypatch.setitem(sys.modules, 'tools', tools)
-    monkeypatch.setitem(sys.modules, 'tools.mcp_tool', mcp)
-    monkeypatch.setitem(sys.modules, 'tools.mcp_tool_scope', resolver)
-    monkeypatch.setitem(mcp_access._BINDINGS, str(tmp_path.resolve()), (NS(), captured, 'correct'))
-    groups = mcp_access.declared_icons(tmp_path, 'probe', 'counts')
-    assert groups[0][0].src == DATA
-    assert groups[1][0].src == 'https://server.example.org/logo'
-    assert mcp_access.declared_icons(tmp_path / 'other-profile', 'probe', 'counts') == ([], [])
+    def tool_info(name):
+        if scope.get() != 'correct' or name != 'mcp__probe__counts':
+            return {'exists': False}
+        return {'exists': True, 'icons': [NS(src=DATA, mimeType='image/png')],
+                'server_icons': [NS(src='https://server.example.org/logo')]}
+    key = str(tmp_path.resolve())
+    mcp_access._BINDINGS[key] = (NS(), captured, 'correct')
+    try:
+        assert mcp_access.declared_icons(tmp_path, 'probe', 'counts') == ([], [])  # no public API: off
+    finally:
+        mcp_access._BINDINGS.pop(key, None)
+    mcp_access._BINDINGS[key] = (NS(tool_info=tool_info), captured, 'correct')
+    try:
+        groups = mcp_access.declared_icons(tmp_path, 'probe', 'counts')
+        assert groups[0][0].src == DATA
+        assert groups[1][0].src == 'https://server.example.org/logo'
+        assert mcp_access.declared_icons(tmp_path / 'other-profile', 'probe', 'counts') == ([], [])
+        _resolve_mcp_icon_without_requests(tmp_path)
+    finally:
+        mcp_access._BINDINGS.pop(key, None)
+
+
+def _resolve_mcp_icon_without_requests(tmp_path):
     store = Store(tmp_path)
     net = Net(store, clock=lambda: 1000)
     calls = []

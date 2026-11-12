@@ -2,6 +2,14 @@
 
 ## 0.5.0-dev — Unreleased
 
+### Changed
+
+- MCP uses Hermes's public plugin API only. The `mcp.tool` source and
+  MCP-declared icons are off unless Hermes provides `ctx.tool_info`, and turn
+  back on by themselves once it does. The private read-only, cost, no-prompt and
+  icon lookups are gone; calls still go through public `ctx.call_mcp`. Raised in
+  the catalog review.
+
 ### Added
 
 - Message previews (opt-in): a notifications pulse approved with `preview: true`

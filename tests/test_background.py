@@ -351,7 +351,6 @@ def test_os_fence_is_cross_process_even_without_a_fresh_lease(tmp_path):
 @pytest.mark.parametrize('read_only,requires_approval', [(False, False), (True, True)])
 def test_background_mcp_uses_same_refusal_gate(tmp_path, monkeypatch, read_only, requires_approval):
     from contextvars import copy_context
-    from contextlib import nullcontext
     from pulse_rings import mcp_access
     calls = []
     ctx = SimpleNamespace(
@@ -359,7 +358,6 @@ def test_background_mcp_uses_same_refusal_gate(tmp_path, monkeypatch, read_only,
             'read_only': read_only, 'requires_approval': requires_approval},
         call_mcp=lambda *args, **kw: calls.append(args))
     monkeypatch.setitem(mcp_access._BINDINGS, str(tmp_path.resolve()), (ctx, copy_context(), str(tmp_path)))
-    monkeypatch.setattr(mcp_access, 'unattended_scope', nullcontext)
     monkeypatch.setattr(mcp_access, 'server_granted', lambda server: True)
     engine = Engine(tmp_path, clock=lambda: 10000)
     engine.activate(normalize({'pulse': 1, 'title': 'MCP', 'source': {'kind': 'mcp.tool',

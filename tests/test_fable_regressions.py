@@ -1,5 +1,4 @@
 """Acceptance regressions for Fable findings #69, #71 and #72. Offline only."""
-import contextlib
 from contextvars import copy_context
 import json
 from types import SimpleNamespace
@@ -93,7 +92,6 @@ def test_71_granted_mcp_clears_stale_missing_grant(tmp_path, monkeypatch, explic
     engine = Engine(tmp_path, clock=lambda: clock[0], jitter=lambda: 0)
     monkeypatch.setitem(mcp_access._BINDINGS, str(tmp_path.resolve()), (ctx, copy_context(), str(tmp_path)))
     monkeypatch.setattr(mcp_access, 'server_granted', lambda server: granted[0])
-    monkeypatch.setattr(mcp_access, 'unattended_scope', contextlib.nullcontext)
     source = {'kind': 'mcp.tool', 'params': {'server': 'probe', 'tool': 'read_metrics', 'args': {}, 'metrics': {'count': '/count'}}}
     raw = {'pulse': 1, 'title': 'MCP state', 'icon': 'initials'}
     if explicit_feeds:

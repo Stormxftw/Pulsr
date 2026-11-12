@@ -28,8 +28,8 @@ readme: true
 screenshots: []
 known_issues:
   - Background collection is opt-in and needs a running Hermes process; alert toasts need a visible Desktop window.
-  - MCP pulses need the server connected in the polling process; hosted Nous-gateway connectors are not supported.
-  - Validator cautions - private MCP policy imports (read-only, fail closed; catalog rule 9) and three scanner pattern matches, explained in the README.
+  - MCP pulses and MCP icons stay off until Hermes exposes public MCP tool metadata (ctx.tool_info), then turn on by themselves; hosted Nous-gateway connectors are not supported.
+  - Validator caution - three scanner pattern matches, explained in the README.
   - Windows notification pulses work on Windows only.
   - Not yet checked by an independent security review.
 capabilities:

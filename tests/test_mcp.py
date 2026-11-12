@@ -14,7 +14,6 @@ def definition(**params):
         'server': 'probe', 'tool': 'read_metrics', 'args': {}, 'metrics': {'count': '/nested/0/count'}, **params}}}
 
 
-from contextlib import nullcontext
 from contextvars import copy_context
 import threading
 
@@ -33,7 +32,6 @@ def connector(tmp_path, monkeypatch):
     ctx = SimpleNamespace(tool_info=lambda name: flags, call_mcp=lambda server, tool, args, *, timeout: (
         calls.append((server, tool, args, timeout)) or {'ok': True, 'result': json.dumps({'nested': [{'count': 7}], 'private': 'RESULT_CANARY'})}))
     monkeypatch.setitem(mcp_access._BINDINGS, str(tmp_path.resolve()), (ctx, copy_context(), str(tmp_path)))
-    monkeypatch.setattr(mcp_access, 'unattended_scope', nullcontext)
     monkeypatch.setattr(mcp_access, 'server_granted', lambda server: True, raising=False)
     net = Net(Store(tmp_path), clock=lambda: 1000)
     return ctx, flags, calls, mcp.McpToolSource(tmp_path), net
@@ -53,7 +51,7 @@ def test_numeric_pointer_and_no_raw_leak(connector):
 
 
 @pytest.mark.parametrize('field,reason', [('exists', 'not found'), ('connected', 'not connected'),
-    ('read_only', 'not marked read-only'), ('requires_approval', 'safety unavailable')])
+    ('read_only', 'not marked read-only'), ('requires_approval', 'needs approval or spend')])
 def test_fail_closed_before_dispatch(connector, field, reason):
     connector[1][field] = field == 'requires_approval'
     with pytest.raises(SourceError, match=reason):
@@ -198,29 +196,44 @@ def test_badge_is_host_policy_not_definition_text(connector, tmp_path):
     assert 'args_display' in mcp.disclosure(d, tmp_path)
 
 
-@pytest.mark.parametrize('phase', ['enter', 'exit'])
-def test_scope_failure_releases_exactly_one_slot(connector, monkeypatch, phase):
-    from contextlib import contextmanager
+def test_collect_failure_releases_exactly_one_slot(connector, monkeypatch):
     slots = threading.BoundedSemaphore(1)
     monkeypatch.setattr(mcp, '_SLOTS', slots)
-    finished = threading.Event()
-    @contextmanager
-    def broken_scope():
-        try:
-            if phase == 'enter':
-                raise RuntimeError('SECRET_CANARY')
-            yield
-            raise RuntimeError('SECRET_CANARY')
-        finally:
-            finished.set()
-    monkeypatch.setattr(mcp_access, 'unattended_scope', broken_scope)
-    with pytest.raises(SourceError, match='unattended safety unavailable'):
+    monkeypatch.setattr(mcp_access, 'tool_policy', lambda *a, **kw: (_ for _ in ()).throw(RuntimeError('SECRET_CANARY')))
+    with pytest.raises(SourceError) as err:
         poll(connector)
-    assert finished.wait(1)
+    assert 'SECRET_CANARY' not in str(err.value)
     assert slots.acquire(timeout=1)
     assert not slots.acquire(blocking=False)
     slots.release()
     assert not mcp._INFLIGHT
+    assert connector[2] == []
+
+
+def test_source_is_off_without_public_tool_info(connector, tmp_path):
+    """Catalog rule: no private core seams. Hermes without ctx.tool_info never calls MCP."""
+    del connector[0].tool_info
+    with pytest.raises(SourceError, match='no public read-only metadata'):
+        poll(connector)
+    assert connector[2] == []
+    assert connector[4].usage()['used'] == 0
+    assert mcp_access.tool_policy(connector[0], 'probe', 'read_metrics') == (False, mcp_access.UNAVAILABLE)
+    assert mcp.disclosure(normalize(definition()), tmp_path)['read_only'] is False
+    assert mcp_access.declared_icons(tmp_path, 'probe', 'read_metrics') == ([], [])
+
+
+def test_no_private_core_imports():
+    import ast
+    import pulse_rings
+    from pathlib import Path
+    private = ('gateway', 'tools.mcp_tool', 'tools.mcp_oauth', 'tools.mcp_tool_scope', 'tools.mcp_tool_handlers')
+    for path in Path(pulse_rings.__file__).parent.rglob('*.py'):
+        for node in ast.walk(ast.parse(path.read_text(encoding='utf-8'))):
+            names = ([a.name for a in node.names] if isinstance(node, ast.Import) else
+                     [node.module or ''] + [f'{node.module}.{a.name}' for a in node.names]
+                     if isinstance(node, ast.ImportFrom) and not node.level else [])
+            hits = [n for n in names if any(n == p or n.startswith(p + '.') for p in private)]
+            assert not hits, (path.name, hits)
 
 
 def test_busy_connector_is_deferred_without_dispatch(connector, monkeypatch):

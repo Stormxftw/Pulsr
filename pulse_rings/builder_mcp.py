@@ -1,7 +1,7 @@
 """Explicit human one-shot MCP inspection. No durable state or source activation.
 
-Shares the poller's profile binding, read-only policy, unattended refusal scope,
-worker semaphore/in-flight exclusion, public call_mcp and JSON decoder. No direct MCP
+Shares the poller's profile binding, public read-only policy, worker
+semaphore/in-flight exclusion, public call_mcp and JSON decoder. No direct MCP
 transport and no retries; results live only in the HTTP response.
 """
 import copy
@@ -34,6 +34,8 @@ def tool_inventory(root):
     if binding is None:
         return {'tools': [], 'reason': 'MCP connector unavailable here; load the agent plugin in this process.'}
     ctx, context, scope = binding
+    if not mcp_access.available(ctx):
+        return {'tools': [], 'reason': mcp_access.UNAVAILABLE}
 
     def read():
         public = getattr(ctx, 'list_tools', None)
@@ -98,23 +100,22 @@ def test_call(root, server, tool, args, *, clock=time.monotonic):
 
     def run():
         try:
-            with mcp_access.unattended_scope():
-                okay, reason = mcp_access.tool_policy(ctx, server, tool, scope)
-                if not okay:
-                    raise TestCallError(403, reason)
-                if cancelled.is_set():
-                    return
-                # EXACTLY ONE public call. Host auth/trust/grant remains authoritative.
-                raw = ctx.call_mcp(server, tool, copy.deepcopy(args), timeout=mcp.TIMEOUT)
-                if cancelled.is_set():
-                    return
-                body = mcp._decode(raw)
-                text = json.dumps(body, ensure_ascii=False, allow_nan=False, separators=(',', ':'))
-                encoded = text.encode('utf-8')
-                truncated = len(encoded) > LIMIT
-                item = {'body': None if truncated else body,
-                        'text': encoded[:LIMIT].decode('utf-8', errors='ignore'), 'truncated': truncated,
-                        'numeric': [] if truncated else numeric_leaves(body), 'calls': 1, 'persisted': False}
+            okay, reason = mcp_access.tool_policy(ctx, server, tool, scope)
+            if not okay:
+                raise TestCallError(403, reason)
+            if cancelled.is_set():
+                return
+            # EXACTLY ONE public call. Host auth/trust/grant remains authoritative.
+            raw = ctx.call_mcp(server, tool, copy.deepcopy(args), timeout=mcp.TIMEOUT)
+            if cancelled.is_set():
+                return
+            body = mcp._decode(raw)
+            text = json.dumps(body, ensure_ascii=False, allow_nan=False, separators=(',', ':'))
+            encoded = text.encode('utf-8')
+            truncated = len(encoded) > LIMIT
+            item = {'body': None if truncated else body,
+                    'text': encoded[:LIMIT].decode('utf-8', errors='ignore'), 'truncated': truncated,
+                    'numeric': [] if truncated else numeric_leaves(body), 'calls': 1, 'persisted': False}
         except PermissionError:
             item = TestCallError(403, mcp_access.grant_message(server))
         except mcp.TruncatedResult as exc:

@@ -373,17 +373,18 @@ every: 15m
   handles stdio/HTTP transport and sign-in, including MCP OAuth. The server may
   access private data, files or network services under its own configured authority;
   this is **not** `http_json`'s public-HTTPS/IP-pinned transport.
-- **Read-only, fail-closed:** before dispatch, live host policy must confirm the
-  tool's discovered `readOnlyHint=true`. Missing/unknown policy or a write-capable
-  tool is refused. Servers with any declared spend/cost policy are refused, even
-  nominally free calls. Read-only annotations are a server claim, not a sandbox or
-  proof that a dishonest server cannot cause effects. Choose trusted connectors.
-- **No prompts from polls:** finite-turn and suppressed-interactive-OAuth scopes
-  decline server elicitation and interactive sign-in instead of prompting. If
-  reconnection needs sign-in, finish it in Hermes interactively, not on a refresh.
-  These scopes do not disable every server capability: server-initiated MCP
-  sampling remains a Hermes/server setting and may use model tokens if enabled.
-  Disable sampling for a connector intended to be strictly model-free.
+- **Off until Hermes publishes MCP tool metadata:** before dispatch, the host's
+  public `ctx.tool_info` must confirm the tool is connected, read-only
+  (`readOnlyHint=true`) and needs no approval or spend. Hermes has no such API
+  yet, so on current releases MCP pulses show *“MCP pulses are off”* and never
+  call the tool. Missing or unknown metadata is refused, never treated as
+  permission. Read-only annotations are a server claim, not a sandbox or proof
+  that a dishonest server cannot cause effects. Choose trusted connectors.
+- **Prompts and sign-in belong to Hermes:** `call_mcp` keeps Hermes's own
+  elicitation, approval and sign-in handling. If reconnection needs sign-in,
+  finish it in Hermes interactively. Server-initiated MCP sampling remains a
+  Hermes/server setting and may use model tokens if enabled. Disable sampling for
+  a connector intended to be strictly model-free.
 - **Trust boundary:** Hermes's MCP trust gate still applies inside the tool
   handler, but `call_mcp` invokes the native handler directly: other plugins'
   `pre_tool_call` hooks (including airlock-style guards) **do not run for these
@@ -597,46 +598,21 @@ series evidence, not proof for every input or live collection.
 adjacent relative imports only. It does not replace a Hermes/core module, patch
 host functions/tables or alter `sys.path`; this is not a core override.
 
-**MCP metadata compatibility shim (before → after WP12):** Hermes 0.22.7+
-and v0.23.0 document public `ctx.call_mcp`; both polling and builder Test call now
-use it instead of `dispatch_tool`. Neither version exposes the discovered
-read-only/cost policy through a public plugin metadata API. Prefer future
-`ctx.tool_info(name)`; missing/changed private safety seams still fail closed.
+**MCP uses the public plugin API only.** Polls and the builder's Test call go
+through public `ctx.call_mcp`, which applies the operator's `mcp_allowlist` and
+Hermes's own trust, approval and sign-in gates. Pulsr imports no private MCP
+module. Hermes does not yet publish read-only or cost metadata for MCP tools, so
+**the `mcp.tool` source and MCP-declared icons are off unless the host provides
+`ctx.tool_info`**. They turn back on by themselves once core adds it: a tool must
+then be reported connected, existing, `read_only: true` and
+`requires_approval: false` before any call. Icons come only from that same
+public `tool_info` result. The [upstream issue draft](submission/UPSTREAM-ISSUE-mcp-readonly.md)
+asks for that API.
 
-| Private seam | Before WP12 | After WP12 |
-|---|---|---|
-| `tools.mcp_tool_handlers._tool_is_read_only` | Positive discovered hint | Retained; no public equivalent |
-| `tools.mcp_tool_scope._server_key` + `tools.mcp_tool._server_cost_policies` | Refuse every cost policy | Retained; host spend gates may charge within budget and prompt over budget |
-| `tools.mcp_tool_scope._resolve_server_key` + `tools.mcp_tool._servers` | Connection-presence check **and** declared icon lookup | Connection-presence check removed; **icons only** remain |
-| `gateway.session_finite.finite_turn_scope` | Decline elicitation | Retained; public call_mcp does not install a noninteractive scope |
-| `tools.mcp_oauth.suppress_interactive_oauth` | Suppress interactive sign-in | Retained; public call_mcp can reconnect/auth-recover |
-| MCP task `_tools` / `initialize_result` (icon_resolver.py) | Declared icon metadata | Unchanged; no transport/connection authority |
-
-Public scoped registry lookup is retained for tool existence. `call_mcp` handles
-connection failures/reconnects through its error envelope; we no longer inspect a
-private connection table to decide if invocation is possible. Grant disclosure
-reads `hermes_cli.config.load_config`, the same public accessor/tree used by
-`call_mcp`: `ctx.get_config` is **settings-relative** and cannot read this
-entry-level operator grant. Reads execute inside the captured profile context.
-
-Source justification ([v0.23.0 plugins.py:502–566](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/hermes_cli/plugins.py#L502-L566)):
-`call_mcp` checks the grant, calls the native handler and normalizes its envelope;
-it does not install no-prompt scopes. [mcp_tool_handlers.py:123–208](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_tool_handlers.py#L123-L208)
-reserves charges within a spend limit and asks over it: documented spend-limit
-preservation is **not** a guarantee of no spend/no prompts for unattended polls.
-The handler copies the calling context for elicitation and performs reconnect/auth
-recovery ([692–744](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_tool_handlers.py#L692-L744)).
-Finite turns decline consent in [approval_prompt.py:316–319](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/approval_prompt.py#L316-L319)
-via [approval_context.py:207–212](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/approval_context.py#L207-L212).
-OAuth otherwise defaults interactive and may open a browser; suppression prevents
-that ([mcp_oauth.py:334–374](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_oauth.py#L334-L374),
-[811–820](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_oauth.py#L811-L820)).
-
-No host table/function is modified or rebound. Undocumented-core imports remain
-validator warnings needing maintainer review, not a warning-free admission claim.
-The narrowed [upstream issue draft](submission/UPSTREAM-ISSUE-mcp-readonly.md)
-requests public discovered read-only/cost metadata beside `call_mcp`; not posted.
-A public no-prompt scope and icon metadata would remove separate residual seams.
+Grant disclosure reads `hermes_cli.config.load_config`, the same public
+accessor/tree used by `call_mcp`: `ctx.get_config` is **settings-relative** and
+cannot read this entry-level operator grant. No host table or function is
+modified or rebound.
 
 ## Privacy, network and permissions (catalog rule 13)
 

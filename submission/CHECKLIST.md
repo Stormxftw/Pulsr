@@ -214,46 +214,13 @@ explains the same requirement when refused. Hermes rechecks the grant on every
 The per-server grant permits more than read-only tools at the host level, so
 Pulsr still independently refuses unmarked/write-capable or costed tools.
 
-**MCP metadata compatibility shim (before → after WP12):** Hermes 0.22.7+
-and v0.23.0 document public `ctx.call_mcp`; both polling and builder Test call now
-use it instead of `dispatch_tool`. Neither version exposes the discovered
-read-only/cost policy through a public plugin metadata API. Prefer future
-`ctx.tool_info(name)`; missing/changed private safety seams still fail closed.
-
-| Private seam | Before WP12 | After WP12 |
-|---|---|---|
-| `tools.mcp_tool_handlers._tool_is_read_only` | Positive discovered hint | Retained; no public equivalent |
-| `tools.mcp_tool_scope._server_key` + `tools.mcp_tool._server_cost_policies` | Refuse every cost policy | Retained; host spend gates may charge within budget and prompt over budget |
-| `tools.mcp_tool_scope._resolve_server_key` + `tools.mcp_tool._servers` | Connection-presence check **and** declared icon lookup | Connection-presence check removed; **icons only** remain |
-| `gateway.session_finite.finite_turn_scope` | Decline elicitation | Retained; public call_mcp does not install a noninteractive scope |
-| `tools.mcp_oauth.suppress_interactive_oauth` | Suppress interactive sign-in | Retained; public call_mcp can reconnect/auth-recover |
-| MCP task `_tools` / `initialize_result` (icon_resolver.py) | Declared icon metadata | Unchanged; no transport/connection authority |
-
-Public scoped registry lookup is retained for tool existence. `call_mcp` handles
-connection failures/reconnects through its error envelope; we no longer inspect a
-private connection table to decide if invocation is possible. Grant disclosure
-reads `hermes_cli.config.load_config`, the same public accessor/tree used by
-`call_mcp`: `ctx.get_config` is **settings-relative** and cannot read this
-entry-level operator grant. Reads execute inside the captured profile context.
-
-Source justification ([v0.23.0 plugins.py:502–566](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/hermes_cli/plugins.py#L502-L566)):
-`call_mcp` checks the grant, calls the native handler and normalizes its envelope;
-it does not install no-prompt scopes. [mcp_tool_handlers.py:123–208](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_tool_handlers.py#L123-L208)
-reserves charges within a spend limit and asks over it: documented spend-limit
-preservation is **not** a guarantee of no spend/no prompts for unattended polls.
-The handler copies the calling context for elicitation and performs reconnect/auth
-recovery ([692–744](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_tool_handlers.py#L692-L744)).
-Finite turns decline consent in [approval_prompt.py:316–319](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/approval_prompt.py#L316-L319)
-via [approval_context.py:207–212](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/approval_context.py#L207-L212).
-OAuth otherwise defaults interactive and may open a browser; suppression prevents
-that ([mcp_oauth.py:334–374](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_oauth.py#L334-L374),
-[811–820](https://github.com/NousResearch/hermes-agent/blob/v0.23.0/tools/mcp_oauth.py#L811-L820)).
-
-No host table/function is modified or rebound. Undocumented-core imports remain
-validator warnings needing maintainer review, not a warning-free admission claim.
-The narrowed [upstream issue draft](UPSTREAM-ISSUE-mcp-readonly.md)
-requests public discovered read-only/cost metadata beside `call_mcp`; not posted.
-A public no-prompt scope and icon metadata would remove separate residual seams.
+**MCP uses the public plugin API only (after the catalog review).** Polls and the
+builder Test call go through public `ctx.call_mcp`. No private MCP module is
+imported. Hermes has no public read-only/cost metadata for MCP tools yet, so the
+`mcp.tool` source and MCP-declared icons stay off unless the host provides
+`ctx.tool_info`, and turn on by themselves once it does. The earlier private
+read-only, cost, no-prompt and icon lookups are removed; see
+UPSTREAM-ISSUE-mcp-readonly.md for the requested public seam.
 
 ## MCP documentation / feature gates (0.5.0-dev)
 

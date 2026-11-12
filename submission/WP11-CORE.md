@@ -97,7 +97,8 @@ Two report warnings remain for human review:
    not shell/elevation. No dangerous finding remains. The documented mirror is
    intentionally not hidden or renamed just to make the caution disappear.
 2. Private core imports: MCP policy/refusal compatibility seams in
-   `pulse_rings/mcp_access.py` and developer `scripts/verify-mcp-live.py`.
+   `pulse_rings/mcp_access.py` and developer `scripts/verify-mcp-live.py`
+   (both removed after the catalog review; MCP now uses public APIs only).
    The engine-provided file/line/symbol list is retained verbatim in `validate-engine.json`.
    No core mutation was added. Missing seams fail closed; maintainer review and
    the unposted public-seam issue remain open.

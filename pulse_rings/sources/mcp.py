@@ -153,12 +153,11 @@ class McpToolSource:
 
             def run():
                 try:
-                    with mcp_access.unattended_scope():
-                        item = collect()
+                    item = collect()
                 except SourceError as exc:
                     item = exc  # Includes Deferred: local pacing is not a remote failure.
                 except Exception:
-                    item = SourceError('MCP unattended safety unavailable; source disabled.')
+                    item = SourceError('MCP source unavailable. Cached values are preserved.')
                 finally:
                     # One owner, including context-entry AND context-exit failure.
                     with _LOCK:
